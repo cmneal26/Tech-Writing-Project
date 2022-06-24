@@ -80,7 +80,7 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.setBrowserSyncConfig({
     callbacks: {
       ready: function(err, browserSync) {
-        const content_404 = fs.readFileSync('_site/404.html');
+        const content_404 = fs.readFileSync('docs/404.html');
 
         browserSync.addMiddleware("*", (req, res) => {
           // Provides the 404 content without redirect.
@@ -122,8 +122,8 @@ module.exports = function(eleventyConfig) {
 
     // Optional (default is shown)
     // pathPrefix: "/",
-    
-    // Explicitly set path for links to work correctly when hosted by GitHub pages 
+
+    // Explicitly set path for links to work correctly when hosted by GitHub pages
     // https://www.rockyourcode.com/how-to-deploy-eleventy-to-github-pages-with-github-actions/
     pathPrefix: "Tech-Writing-Project",
     // -----------------------------------------------------------------
@@ -133,7 +133,7 @@ module.exports = function(eleventyConfig) {
       input: ".",
       includes: "_includes",
       data: "_data",
-      output: "_site"
+      output: "docs"
     }
   };
 };
