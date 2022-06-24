@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  
+  <url>
+    <loc>https://example.com/Tech-Writing-Project/posts/firstpost/</loc>
+    <lastmod>2018-05-01</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://example.com/Tech-Writing-Project/posts/secondpost/</loc>
+    <lastmod>2018-07-04</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://example.com/Tech-Writing-Project/posts/thirdpost/</loc>
+    <lastmod>2018-08-24</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://example.com/Tech-Writing-Project/posts/fourthpost/</loc>
+    <lastmod>2018-09-30</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://example.com/Tech-Writing-Project/11ty-starter-readme/</loc>
+    <lastmod>2022-06-24</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://example.com/Tech-Writing-Project/about/</loc>
+    <lastmod>2022-06-24</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://example.com/Tech-Writing-Project/posts/</loc>
+    <lastmod>2022-06-24</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://example.com/Tech-Writing-Project/</loc>
+    <lastmod>2022-06-24</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://example.com/Tech-Writing-Project/page-list/</loc>
+    <lastmod>2022-06-24</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://example.com/Tech-Writing-Project/tags/</loc>
+    <lastmod>2022-06-24</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://example.com/Tech-Writing-Project/tags/another-tag/</loc>
+    <lastmod>2022-06-24</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://example.com/Tech-Writing-Project/tags/second-tag/</loc>
+    <lastmod>2022-06-24</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://example.com/Tech-Writing-Project/tags/number-2/</loc>
+    <lastmod>2022-06-24</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://example.com/Tech-Writing-Project/tags/posts-with-two-tags/</loc>
+    <lastmod>2022-06-24</lastmod>
+  </url>
+</urlset>
