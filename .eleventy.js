@@ -121,7 +121,11 @@ module.exports = function(eleventyConfig) {
     // You can also pass this in on the command line using `--pathprefix`
 
     // Optional (default is shown)
-    pathPrefix: "/",
+    // pathPrefix: "/",
+    
+    // Explicitly set path for links to work correctly when hosted by GitHub pages 
+    // https://www.rockyourcode.com/how-to-deploy-eleventy-to-github-pages-with-github-actions/
+    pathPrefix: "Tech-Writing-Project",
     // -----------------------------------------------------------------
 
     // These are all optional (defaults are shown):
