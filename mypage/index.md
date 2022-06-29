@@ -7,7 +7,7 @@ title: My Page
 
 ### 1. Create a [https://www.markdowntutorial.com/](Markdown) file with an ".md" file extension.
 
-The markdown file can be the root folder of the site, and existing folder such as "/about", or in a new folder. A new folder is useful if you have multiple related pages--`index.md` will be the default page for the folder. The URL for the page will reflect where you place the file. For example, if a "/mypage.md" file is added to the root folder, then it will be available at:
+The markdown file can be in the root folder of the site, an existing folder such as "/about", or in a new folder. A new folder is useful if you have multiple related pages--`index.md` will be the default page for the folder. The URL for the page will reflect where you place the file. For example, if a "/mypage.md" file is added to the root folder, then it will be available at:
 [http://localhost:8080/Tech-Writing-Project/mypage/](http://localhost:8080/Tech-Writing-Project/mypage/)
 
     
