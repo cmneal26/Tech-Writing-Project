@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kids</title>
+    <meta name="description" content="I am writing about my experiences as a naval navel-gazer.">
+    <meta name="generator" content="Eleventy v1.0.1">
+    <link rel="stylesheet" href="/Tech-Writing-Project/css/index.css">
+    <link rel="stylesheet" href="/Tech-Writing-Project/css/prism-base16-monokai.dark.css">
+    <link rel="stylesheet" href="/Tech-Writing-Project/css/prism-diff.css">
+    <link rel="alternate" href="/Tech-Writing-Project/feed/feed.xml" type="application/atom+xml" title="Your Blog Name">
+    <link rel="alternate" href="/Tech-Writing-Project/feed/feed.json" type="application/json" title="Your Blog Name">
+  </head>
+  <body>
+    <header>
+      <h1 class="home">
+        <a href="/Tech-Writing-Project/">Your Blog Name</a>
+      </h1>
+      <ul class="nav">
+          <li class="nav-item">
+            <a href="/Tech-Writing-Project/">Home</a>
+          </li>
+          <li class="nav-item">
+            <a href="/Tech-Writing-Project/posts/">Archive</a>
+          </li>
+          <li class="nav-item">
+            <a href="/Tech-Writing-Project/about/">About Me</a>
+          </li>
+          <li class="nav-item">
+            <a href="/Tech-Writing-Project/api/api-reference/">Transparency</a>
+          </li>
+          <li class="nav-item nav-item-active">
+            <a href="/Tech-Writing-Project/kids/">Kids</a>
+          </li>
+      </ul>
+    </header>
+    <main  class="tmpl-kids" >
+      
+<div id="game">
+    <script>
+        // NOTE: replace [X, O] with [snakeEmoji, mongooseEmoji]
+        const gameState = {}
+        const board = {
+            one: 'X',
+            two: 'O',
+            three: 'X',
+            four: 'O',
+            five: 'X',
+            six: 'O',
+            seven: 'X',
+            eight: 'O',
+            nine: 'X'
+        }
+
+        function setCell(cellId, newValue) {
+             const cell = document.getElementById(cellId)
+             cell.innerText = newValue
+        }
+
+        function populateDummyBoard() {
+            const numberToWord = {
+                1: "one",
+                2: "two",
+                3: "three",
+                4: "four",
+                5: "five",
+                6: "six",
+                7: "seven",
+                8: "eight",
+                9: "nine"
+            }
+            const tableElementNumbers = Array.from({
+                length: 10
+            }, (_, i) => numberToWord[i + 1])
+            tableElementNumbers.forEach((cell) => document.getElementById(cell).innerText = 'X')
+        }
+        function play() {
+            // play Tic Tac Toe
+            console.log("board.one", board.one)
+            console.log("play TTT")
+        }
+    </script>
+    <div id="game-section">
+        <table id="board">
+            <tr class="row">
+                <td class="cell" id="one" onclick="setCell('one', 'X')"></td>
+                <td class="cell" id="two" onclick="setCell('two', 'O')"></td>
+                <td class="cell" id="three" onclick="setCell('three', 'X')"></td>
+            </tr>
+            <tr class="row">
+                <td class="cell" id="four" onclick="setCell('four', 'O')"></td>
+                <td class="cell" id="five" onclick="setCell('five', 'X')"></td>
+                <td class="cell" id="six" onclick="setCell('six', 'O')"></td>
+            </tr>
+            <tr class="row">
+                <td class="cell" id="seven" onclick="setCell('seven', 'X')"></td>
+                <td class="cell" id="eight" onclick="setCell('eight', 'O')"></td>
+                <td class="cell" id="nine" onclick="setCell('nine', 'X')"></td>
+            </tr>
+        </table>
+        <span>
+            <button id="populate-board" onclick="populateDummyBoard()">Populate Board</button>
+            <button id="play-button" onclick="play()">
+                Play TTT
+            </button>
+        </span>
+    </div>
+</div></div>
+    </main>
+    <footer></footer>
+    <!-- Current page: /Tech-Writing-Project/kids/ -->
+  </body>
+</html>
