@@ -1,0 +1,34 @@
+---
+layout: layouts/base.njk
+templateClass: tmpl-transparency
+---
+
+<center>
+    <h1>Transparency</h1>
+</center>
+<center>
+    <p>Because we value transparency, we've made available for your viewing pleasure all the API Endpoints We Call On This
+        Site</p>
+</center>
+<center>
+    <hr/>
+    <h3>{{duckOpenApi.info.title}}</h3>
+    <ul style="list-style: none;">
+        <li>
+            <label style="color:green;">GET</label>
+            {{duckOpenApi.servers[0].url}}/random</li>
+        <li>
+            <b>{{duckOpenApi.paths["/random"].get.description}}</b>
+        </li>
+        <li>
+            <span>
+                <label style="color:green;">
+                    <b>RESPONSE:</b>
+                </label>
+                <mark>
+                    <code>{{duckOpenApi.paths["/random"].get.responses["200"].example | dump}}</code>
+                </mark>
+            </span>
+        </li>
+    </ul>
+</center>
