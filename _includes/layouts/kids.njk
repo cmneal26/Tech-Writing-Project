@@ -4,31 +4,72 @@ templateClass: tmpl-kids
 ---
 
 <div id="game">
+    <script>
+        // NOTE: replace [X, O] with [snakeEmoji, mongooseEmoji]
+        const gameState = {}
+        const board = {
+            one: 'X',
+            two: 'O',
+            three: 'X',
+            four: 'O',
+            five: 'X',
+            six: 'O',
+            seven: 'X',
+            eight: 'O',
+            nine: 'X'
+        }
 
-<script>
+        function setCell(cellId, newValue) {
+             const cell = document.getElementById(cellId)
+             cell.innerText = newValue
+        }
 
-const gameState = {
-
-
-}
-
-const board = const board = {
-  one: null,
-  two: null,
-  three: null,
-  four: null,
-  five: null,
-  six: null,
-  seven: null,
-  eight: null,
-  nine: null,
-}
-
-function play() {
-  // play Tic Tac Toe
-
-}
-
-</script>
-
-</div>
+        function populateDummyBoard() {
+            const numberToWord = {
+                1: "one",
+                2: "two",
+                3: "three",
+                4: "four",
+                5: "five",
+                6: "six",
+                7: "seven",
+                8: "eight",
+                9: "nine"
+            }
+            const tableElementNumbers = Array.from({
+                length: 10
+            }, (_, i) => numberToWord[i + 1])
+            tableElementNumbers.forEach((cell) => document.getElementById(cell).innerText = 'X')
+        }
+        function play() {
+            // play Tic Tac Toe
+            console.log("board.one", board.one)
+            console.log("play TTT")
+        }
+    </script>
+    <div id="game-section">
+        <table id="board">
+            <tr class="row">
+                <td class="cell" id="one" onclick="setCell('one', 'X')"></td>
+                <td class="cell" id="two" onclick="setCell('two', 'O')"></td>
+                <td class="cell" id="three" onclick="setCell('three', 'X')"></td>
+            </tr>
+            <tr class="row">
+                <td class="cell" id="four" onclick="setCell('four', 'O')"></td>
+                <td class="cell" id="five" onclick="setCell('five', 'X')"></td>
+                <td class="cell" id="six" onclick="setCell('six', 'O')"></td>
+            </tr>
+            <tr class="row">
+                <td class="cell" id="seven" onclick="setCell('seven', 'X')"></td>
+                <td class="cell" id="eight" onclick="setCell('eight', 'O')"></td>
+                <td class="cell" id="nine" onclick="setCell('nine', 'X')"></td>
+            </tr>
+        </table>
+        <span>
+            <button id="populate-board" onclick="populateDummyBoard()">Populate Board</button>
+            <button id="play-button" onclick="play()">
+                Play TTT
+            </button>
+        </span>
+    </div>
+</div></div>
