@@ -5,304 +5,58 @@ templateClass: tmpl-kids
 
 <div id="game">
     <script>
+        const apiBaseUrl = "http://tttapi.herokuapp.com/api/v1"
         // NOTE: replace [X, O] with [snakeEmoji, mongooseEmoji]
+        let board = '---------'
         const gameState = {
             playerTurn: 'X', // computer player is always X, goes first
             playing: false,
             winner: null
         }
-        const board = {
-            one: null,
-            two: null,
-            three: null,
-            four: null,
-            five: null,
-            six: null,
-            seven: null,
-            eight: null,
-            nine: null
+        const createFullUrl = (board, player) => {
+            return `${apiBaseUrl}/${board}/${player}`
         }
-        const numberToWord = {
-            1: "one",
-            2: "two",
-            3: "three",
-            4: "four",
-            5: "five",
-            6: "six",
-            7: "seven",
-            8: "eight",
-            9: "nine"
-        }
-        const printBoard = () => {
-            console.info(`${
-                board.one || ' '
-            }|${
-                board.two || ' '
-            }|${
-                board.three || ' '
-            }\n${
-                board.four || ' '
-            }|${
-                board.five || ' '
-            }|${
-                board.six || ' '
-            }\n${
-                board.seven || ' '
-            }|${
-                board.eight || ' '
-            }|${
-                board.nine || ' '
-            }\n`)
-        }
-        const setGameStateMessage = (message) => {
-            const messageElement = document.getElementById('game-state-message')
-            if (message) {
-                messageElement.innerText = message
-                return
-            }
-            if (playing === false) {
-                if ((gameState.playerTurn === 'X') && (gameState.winner === 'X')) {
-                    messageElement.innerText = `${
-                        gameState.winner
-                    } wins!`
-                } else {
-                    messageElement.innerText = `${
-                        gameState.playerTurn
-                    } doesn't win! But may not have lost eihter!`
-                }
-            } else {
-                messageElement.innerText = "Game In Progress"
-            }
-        }
-        const copyBoard = (board) => {
-            const boardCopy = structuredClone(board)
-            console.info("copyBoard", board)
-            console.info("copyBoard", boardCopy)
-            return boardCopy
-        }
-        const getEmptySquares = (board) => {
-            const emptySquares = []
-            const entries = Object.entries(board)
-            for (let entry of entries) {
-                if (entry[1] === null) {
-                    emptySquares.push(entry[0])
-                }
-            }
-            console.info("empty squares in getEmpty Squares", emptySquares)
-            return emptySquares
-        }
-        const checkGameStatus = (board) => {
-            // top row
-            if ((board.one !== null) && ((board.one === board.two) && (board.two === board.three))) {
-                gameState.winner = board.one
-                    console.info("board in top row", board)
-                    console.info("top row win")
-                return {player: board.one, status: "win"}
-            }
-            // middle row
-            if ((board.four !== null) && ((board.four === board.five) && (board.five === board.six))) {
-                gameState.winner = board.four
-                console.info("middle row win")
-                return {player: board.four, status: "win"}
-            }
-            // bottom row
-            if ((board.seven !== null) && ((board.seven === board.eight) && (board.eight === board.nine))) {
-                gameState.winner = board.seven
-                console.info("bottom row win")
-                return {player: board.seven, status: "win"}
-            }
-            // left column
-            if ((board.one !== null) && ((board.one === board.four) && (board.four === board.seven))) {
-                gameState.winner = board.one
-                console.info("left col win")
-                return {player: board.one, status: "win"}
-            }
-            // middle column
-            if ((board.two !== null) && ((board.two === board.five) && (board.five === board.eight))) {
-                gameState.winner = board.two
-                console.info("middle col win")
-                return {player: board.two, status: "win"}
-            }
-            // right column
-            if ((board.three !== null) && ((board.three === board.six) && (board.six === board.nine))) {
-                gameState.winner = board.three
-                console.info("right col win")
-                return {player: board.three, status: "win"}
-            }
-            // start top left diagonal
-            if ((board.one !== null) && ((board.one === board.five) && (board.five === board.nine))) {
-                gameState.winner = board.one
-                console.info("top left diagonal win")
-                return {player: board.one, status: "win"}
-            }
-            // start top right diagonal
-            if ((board.three !== null) && ((board.three === board.five) && (board.five === board.seven))) {
-                gameState.winner = board.three
-                console.info("top right diagonal win")
-                return {player: board.three, status: "win"}
-            }
-            if (getEmptySquares(board).length > 0) {
-                return {"status": "in progress"}
-            }
-            // squares full, no winner
-            return {status: "tie"}
-        }
-        const scoreTestBoard = (board, location, player) => {
-            // play game, randomly filling squares; win 1, tie 0, loss -1 for player
-            let empty = getEmptySquares(board)
-            console.info("empty squares before score board")
-            let randomLoc = null
-            let turnCount = 0
-            let gameResult
-            let square;
-            while (empty.length > 0) {
-                turnCount = turnCount + 1
-                console.info("turn count", turnCount)
-                randomLoc = Math.floor(Math.random() * (empty.length - 1));
-                square = empty[randomLoc]
-                board[square] = player
-                console.info("before")
-                empty = empty.filter((location) => location === square)
-                // check win status
-                console.info("empty after filter inside loop", empty)
-                gameResult = checkGameStatus(board)
-                console.info("checkGameStatus(board)", gameResult)
-                if (gameResult.status === "win" || gameResult.status === "tie") {
-                    // game is over, break out of loop
-                    break
-                }
-            }
-            console.info("after main game loop")
-            gameResult = checkGameStatus(board)
-            console.info("gameResult after main game loop", gameResult)
-
-            if ((gameResult.status === "win") && (gameResult.player === gameState.playerTurn)) { // win
-                return {score: 1, location, status: gameResult.status}
-            } else if (gameResult.status === "win") { // loss
-                return {score: -1, location, status: gameResult.status}
-            } else { // tie
-                return {score: 0, location, status: gameResult.status}
-            }
-        }
-        const scoreTestBoards = (boards, player) => {
-            let count = 0
-            let result = boards.map((board) => {
-                return scoreTestBoard(board, player)
-            })
-            return {count: result.score, location: result.location, status: result.status}
-        }
-        const generateTestBoard = (board, player) => {
-            let score = 0
-            const squares = getEmptySquares(board)
-            const randomSquareLocation = Math.floor(Math.random() * (squares.length - 1));
-            console.info("randomSquareLocation", randomSquareLocation)
-            const copiedBoard = copyBoard(board)
-            copiedBoard[squares[randomSquareLocation]] = player
-            console.info("inside generateTest after copiedBoard: player | ", copiedBoard)
-            return {copiedBoard, location: randomSquareLocation}
-        }
-        const generateTestBoards = (boards, player) => {
-            console.log("inside generateTestBoards; boards", boards)
-            return boards.map(board => generateTestBoard(board, player))
-        }
-        const countTestBoards = (boards) => {
-            const scores = boards.map(board => scoreTestBoard(board))
-            const totalScore = scores.reduce((partialSum, a) => partialSum + a, 0)
-            return totalScore
+        const setPlayerTurn = (player) => {
+            gameState.playerTurn = player
         }
         const setCell = (cellId, newValue) => {
-            if (gameState.playing && gameState.playerTurn === 'O') { // human is always O
+            if (gameState.playing) { // human is always O
                 const cell = document.getElementById(cellId)
                 cell.innerText = newValue
             }
         }
-        const populateDummyBoard = () => {
-            const tableElementNumbers = Array.from({
-                length: 10
-            }, (_, i) => numberToWord[i + 1])
-            tableElementNumbers.forEach((cell) => document.getElementById(cell).innerText = 'X')
+        const setBoard = (newBoard) => {
+            board = newBoard
         }
-        const getBestMove = (board, player, gamesPlayed) => {
-            const locationsScored = []
-            const counts = {}
-            const range = [...Array(gamesPlayed).keys()]
-            const testBoards = []
-            let testBoard
-            for (num in range) { // play one game each iteration
-                testBoard = generateTestBoard(board, player)
-                testBoards.push(testBoards)
-            }
-            const result = scoreTestBoards(generateTestBoards(testBoards))
-            locationsScored.push({score: result.count, location: result.location})
-            // count up the scores for each empty spot/potential move
-            locationsScored.forEach(scored => {
-                if (!counts[scored.location]) {
-                    counts[scored.location] = scored.score
-                } else {
-                    counts[scored.location] += counts[scored.score]
-                }
-            })
-            let currentLargestCountLocation;
-            let currentLargestCount;
-            console.info("counts before entries", counts)
-            const entries = Object.entries(counts)
-            console.info("entries before setting count|location", entries)
-            for (let entry in entries) {
-                if (! currentLargestCount || (entry.count > currentLargestCount)) {
-                    currentLargestCountLocation = entry.location
-                    currentLargestCount = entry.count
-                }
-            }
-
-            if (!currentLargestCountLocation) {
-                console.info("largestLocation undefined in getBestMove")
-                console.info("entries after setting count|location", entries)
-            }
-            
-            return currentLargestCountLocation
+        const clearBoard = () => {
+            board = '---------'
         }
-        const updatedBoard = (board, player, location) => {
+        const move = (board, player, location) => {
             board[location] = player
-            return  board
-        }
-        const clearBoard = (board) => {
-            Object.keys(board).forEach(location => {
-                board[location] = null
-            })
         }
         const play = () => {
-            // play Tic Tac Toe
-            playing = true
-            let loopNumber = 0
-            setGameStateMessage("Game In Progress")
-            clearBoard(board)
-            printBoard()
-            let gameStatus = checkGameStatus(board)
-            console.log("gameStatus before any moves", gameStatus)
-            while (gameStatus.status == 'in progress') { // move
-                loopNumber = loopNumber + 1
-                if (loopNumber > 10) {
-                    console.info("exceeded 10 loopNumber")
-                    break
+            let turn = 0
+            console.log("playing TTT")
+            gameState.playing = true
+            clearBoard()
+            setPlayerTurn('X')
+            while (gameState.playing) {
+                turn = turn + 1
+                if (turn > 10) {
+                   break
                 }
-                console.info("loopNumber", loopNumber)
-                console.info("player turn before move", gameState.playerTurn)
-                if (gameState.playerTurn === "X") {
-                    console.info("board before best move:", board)
-                    console.info("gameState.PlayerTurn before best move", gameState.playerTurn) 
-                    const bestMove = getBestMove(board, gameState.playerTurn, 10) // play 10 games
-                    console.info("best move for computer player X", bestMove)
-                    board[bestMove] = gameState.playerTurn
-                    printBoard()
-                    gameStatus = checkGameStatus(board)
-                    gameState.playerTurn = 'O'
-                } else {
-                    gameState.playerTurn = 'X'
+                if (gameState.playerTurn === 'X') { // computer turn
+                    fetch(createFullUrl(board, gameState.playerTurn)).then(response => response.json()).then(data => {
+                        setBoard(data.game)
+                        move(board, 'X', data.recommendation)
+                        setPlayerTurn('O')
+                        setCell(board[data.recommendation - 1])
+                    })
                 }
             }
-            playing = false // end game
-            setGameStateMessage()
+            // game over
         }
+        //
     </script>
     <div id="game-section">
         <table id="board">
