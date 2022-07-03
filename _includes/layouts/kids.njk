@@ -22,20 +22,16 @@ templateClass: tmpl-kids
         const setPlayerTurn = (player) => {
             gameState.playerTurn = player
         }
-
         const computerTurn = () => {
-        
-             fetch(createFullUrl(board, 'X')).then(response => response.json()).then(data => {
-               console.info("fetched data:", data)
-               const computerMove = data.recommendation
-               move(board, computerMove, 'X')
-               const cell = document.getElementById(computerMove.toString())
-               cell.innerText = 'X'
-               setPlayerTurn('O')
-             })
-
+            fetch(createFullUrl(board, 'X')).then(response => response.json()).then(data => {
+                console.info("fetched data:", data)
+                const computerMove = data.recommendation
+                move(board, computerMove, 'X')
+                const cell = document.getElementById(computerMove.toString())
+                cell.innerText = 'X'
+                setPlayerTurn('O')
+            })
         }
-
         const clickCell = (cellId) => {
             console.info("inside setCell", cellId)
             if (gameState.playing) { // human is always O
@@ -50,46 +46,82 @@ templateClass: tmpl-kids
         const setBoard = (newBoard) => {
             board = newBoard
         }
+        const clearCells = () => {
+            const cellIds = [
+                '1',
+                '2',
+                '3',
+                '4',
+                '5',
+                '6',
+                '7',
+                '8',
+                '9'
+            ]
+            cellIds.forEach(cellId => {
+                const cell = document.getElementById(cellId)
+                cell.innerText = ''
+            })
+        }
         const clearBoard = () => {
             board = '---------'
         }
         const move = (board, player, location) => {
             return board.replaceAt(location, player)
         }
-
-        
-
-        const play = () => {
+        const checkGameStatus = () => {
+            // top row win
+            if ((board.charAt(0) !== '-') && (board.charAt(1) === board.charAt(2)) && (board.charAt(2) === board.charAt(3)) {
+                gameState.winner = gameState.playerTurn
+                gameState.playing = false
+            }
+            // middle row win
+                if ((board.charAt(3) !== '-') && (board.charAt(3) === board.charAt(4)) && (board.charAt(4) === board.charAt(5)) {}
+            // bottom row win
+                if ((board.charAt(6) !== '-') && (board.charAt(6) === board.charAt(7)) && (board.charAt(7) === board.charAt(8)) {}
+            // left col win
+                if ((board.charAt(0) !== '-') && (board.charAt(0) === board.charAt(3)) && (board.charAt(3) === board.charAt(6)) {}
+            // middle col win
+                if ((board.charAt(1) !== '-') && (board.charAt(1) === board.charAt(4)) && (board.charAt(4) === board.charAt(7)) {}
+            // right col win
+                if ((board.charAt(2) !== '-') && (board.charAt(2) === board.charAt(5)) && (board.charAt(5) === board.charAt(8)) {}
+        }
+        const play =() => {
             console.log("now playing TTT")
             clearBoard()
+            clearCells()
             setPlayerTurn('O')
             gameState.playing = true
         }
         //
-    </script>
-    <div id="game-section">
-        <table id="board">
-            <tr class="row">
-                <td class="cell" id="1" onclick="clickCell('1')"></td>
-                <td class="cell" id="2" onclick="clickCell('2')"></td>
-                <td class="cell" id="3" onclick="clickCell('3')"></td>
-            </tr>
-            <tr class="row">
-                <td class="cell" id="4" onclick="clickCell('4')"></td>
-                <td class="cell" id="5" onclick="clickCell('5')"></td>
-                <td class="cell" id="6" onclick="clickCell('6')"></td>
-            </tr>
-            <tr class="row">
-                <td class="cell" id="7" onclick="clickCell('7')"></td>
-                <td class="cell" id="8" onclick="clickCell('8')"></td>
-                <td class="cell" id="9" onclick="clickCell('9')"></td>
-            </tr>
-        </table>
-        <span>
-            <button id="play-button" onclick="play()">
-                Activate TTT
-            </button>
-        </span>
-        <p id="game-state-message"></p>
+            </script>
+            <div id="game-section">
+                <table id="board">
+                    <tr class="row">
+                        <td class="cell" id="1" onclick="clickCell('1')"></td>
+                        <td class="cell" id="2" onclick="clickCell('2')"></td>
+                        <td class="cell" id="3" onclick="clickCell('3')"></td>
+                    </tr>
+                    <tr class="row">
+                        <td class="cell" id="4" onclick="clickCell('4')"></td>
+                        <td class="cell" id="5" onclick="clickCell('5')"></td>
+                        <td class="cell" id="6" onclick="clickCell('6')"></td>
+                    </tr>
+                    <tr class="row">
+                        <td class="cell" id="7" onclick="clickCell('7')"></td>
+                        <td class="cell" id="8" onclick="clickCell('8')"></td>
+                        <td class="cell" id="9" onclick="clickCell('9')"></td>
+                    </tr>
+                </table>
+                <span>
+                    <button id="play-button" onclick="play()">
+                        Activate TTT
+                    </button>
+                </span>
+                <p id="game-state-message"></p>
+            </div>
+        </div>
     </div>
-</div></div></div></div></div></div></div></div></div></div> </div>
+</div></div></div></div>
+    </div>
+</div></div></div></div></div>
