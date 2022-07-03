@@ -13,6 +13,9 @@ templateClass: tmpl-kids
             playing: false,
             winner: null
         }
+        String.prototype.replaceAt = function (index, replacement) {
+            return this.substring(0, index) + replacement + this.substring(index + replacement.length);
+        }
         const createFullUrl = (board, player) => {
             return `${apiBaseUrl}/${board}/${player}`
         }
@@ -20,9 +23,12 @@ templateClass: tmpl-kids
             gameState.playerTurn = player
         }
         const setCell = (cellId, newValue) => {
+            console.info("inside setCell", cellId)
             if (gameState.playing) { // human is always O
                 const cell = document.getElementById(cellId)
-                cell.innerText = newValue
+                if (cell.innerText === '-') {
+                    cell.innerText = newValue
+                }
             }
         }
         const setBoard = (newBoard) => {
@@ -32,7 +38,7 @@ templateClass: tmpl-kids
             board = '---------'
         }
         const move = (board, player, location) => {
-            board[location] = player
+            return board.replaceAt(location, player)
         }
         const play = () => {
             let turn = 0
@@ -43,14 +49,19 @@ templateClass: tmpl-kids
             while (gameState.playing) {
                 turn = turn + 1
                 if (turn > 10) {
-                   break
+                    break
                 }
+                console.info('turn set to before:', gameState.playerTurn)
                 if (gameState.playerTurn === 'X') { // computer turn
                     fetch(createFullUrl(board, gameState.playerTurn)).then(response => response.json()).then(data => {
-                        setBoard(data.game)
-                        move(board, 'X', data.recommendation)
-                        setPlayerTurn('O')
-                        setCell(board[data.recommendation - 1])
+                        console
+                            .info("fetched data", data)
+                            setBoard(move(board, 'X', data.recommendation))
+                            console
+                            .info('board after computer move', board)
+                            setPlayerTurn('O') // change to human turn
+                            console
+                            .info('turn set to:', gameState.playerTurn)
                     })
                 }
             }
@@ -61,19 +72,19 @@ templateClass: tmpl-kids
     <div id="game-section">
         <table id="board">
             <tr class="row">
-                <td class="cell" id="one" onclick="setCell('one', 'X')"></td>
+                <td class="cell" id="one" onclick="setCell('one', 'O')"></td>
                 <td class="cell" id="two" onclick="setCell('two', 'O')"></td>
-                <td class="cell" id="three" onclick="setCell('three', 'X')"></td>
+                <td class="cell" id="three" onclick="setCell('three', 'O')"></td>
             </tr>
             <tr class="row">
                 <td class="cell" id="four" onclick="setCell('four', 'O')"></td>
-                <td class="cell" id="five" onclick="setCell('five', 'X')"></td>
+                <td class="cell" id="five" onclick="setCell('five', 'O')"></td>
                 <td class="cell" id="six" onclick="setCell('six', 'O')"></td>
             </tr>
             <tr class="row">
-                <td class="cell" id="seven" onclick="setCell('seven', 'X')"></td>
+                <td class="cell" id="seven" onclick="setCell('seven', 'O')"></td>
                 <td class="cell" id="eight" onclick="setCell('eight', 'O')"></td>
-                <td class="cell" id="nine" onclick="setCell('nine', 'X')"></td>
+                <td class="cell" id="nine" onclick="setCell('nine', 'O')"></td>
             </tr>
         </table>
         <span>
