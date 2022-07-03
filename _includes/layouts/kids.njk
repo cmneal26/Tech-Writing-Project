@@ -22,12 +22,28 @@ templateClass: tmpl-kids
         const setPlayerTurn = (player) => {
             gameState.playerTurn = player
         }
-        const setCell = (cellId, newValue) => {
+
+        const computerTurn = () => {
+        
+             fetch(createFullUrl(board, 'X')).then(response => response.json()).then(data => {
+               console.info("fetched data:", data)
+               const computerMove = data.recommendation
+               move(board, computerMove, 'X')
+               const cell = document.getElementById(computerMove.toString())
+               cell.innerText = 'X'
+               setPlayerTurn('O')
+             })
+
+        }
+
+        const clickCell = (cellId) => {
             console.info("inside setCell", cellId)
             if (gameState.playing) { // human is always O
                 const cell = document.getElementById(cellId)
-                if (cell.innerText === '-') {
-                    cell.innerText = newValue
+                if (board.charAt([parseInt(cellId)]) === '-') {
+                    cell.innerText = 'O'
+                    setPlayerTurn('X')
+                    computerTurn()
                 }
             }
         }
@@ -40,51 +56,33 @@ templateClass: tmpl-kids
         const move = (board, player, location) => {
             return board.replaceAt(location, player)
         }
+
+        
+
         const play = () => {
-            let turn = 0
-            console.log("playing TTT")
-            gameState.playing = true
+            console.log("now playing TTT")
             clearBoard()
-            setPlayerTurn('X')
-            while (gameState.playing) {
-                turn = turn + 1
-                if (turn > 10) {
-                    break
-                }
-                console.info('turn set to before:', gameState.playerTurn)
-                if (gameState.playerTurn === 'X') { // computer turn
-                    fetch(createFullUrl(board, gameState.playerTurn)).then(response => response.json()).then(data => {
-                        console
-                            .info("fetched data", data)
-                            setBoard(move(board, 'X', data.recommendation))
-                            console
-                            .info('board after computer move', board)
-                            setPlayerTurn('O') // change to human turn
-                            console
-                            .info('turn set to:', gameState.playerTurn)
-                    })
-                }
-            }
-            // game over
+            setPlayerTurn('O')
+            gameState.playing = true
         }
         //
     </script>
     <div id="game-section">
         <table id="board">
             <tr class="row">
-                <td class="cell" id="one" onclick="setCell('one', 'O')"></td>
-                <td class="cell" id="two" onclick="setCell('two', 'O')"></td>
-                <td class="cell" id="three" onclick="setCell('three', 'O')"></td>
+                <td class="cell" id="1" onclick="clickCell('1')"></td>
+                <td class="cell" id="2" onclick="clickCell('2')"></td>
+                <td class="cell" id="3" onclick="clickCell('3')"></td>
             </tr>
             <tr class="row">
-                <td class="cell" id="four" onclick="setCell('four', 'O')"></td>
-                <td class="cell" id="five" onclick="setCell('five', 'O')"></td>
-                <td class="cell" id="six" onclick="setCell('six', 'O')"></td>
+                <td class="cell" id="4" onclick="clickCell('4')"></td>
+                <td class="cell" id="5" onclick="clickCell('5')"></td>
+                <td class="cell" id="6" onclick="clickCell('6')"></td>
             </tr>
             <tr class="row">
-                <td class="cell" id="seven" onclick="setCell('seven', 'O')"></td>
-                <td class="cell" id="eight" onclick="setCell('eight', 'O')"></td>
-                <td class="cell" id="nine" onclick="setCell('nine', 'O')"></td>
+                <td class="cell" id="7" onclick="clickCell('7')"></td>
+                <td class="cell" id="8" onclick="clickCell('8')"></td>
+                <td class="cell" id="9" onclick="clickCell('9')"></td>
             </tr>
         </table>
         <span>
