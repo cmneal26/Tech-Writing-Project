@@ -6,27 +6,31 @@ eleventyNavigation:
   order: 4
 ---
 
-# How fetching!
+# Aren't you fetching?!
 
-Aren't you fetching? In the web browser, that is. All modern web browsers supply a Fetch API for making an HTTP request to a web server, and handling the data returned from the server. The Fetch API provides a programming interface to asynchronously exchange data with a web server without needing to load another web page.
+_I'm uncomfortable, you're probably uncomfortable, let's move on to fetching in the web browser_.
+
+All modern web browsers supply a Fetch API for making a HTTP requests to a web server, and handling the data returned from the server. The Fetch API provides a programming interface to asynchronously exchange data with a web server without needing to load another web page.
 
 It's useful to web developers in scenarios such as:
 
-* **Displaying dynamic data** that changes over time.
-  For example, fetching current weather conditions for the given location.
-* **Partially updating the page** in response to user interactivity.
-  For example, fetching and displaying the current stock price for a user provided stock index.
+* **Displaying dynamic data** that changes over time
+  _For example, fetching current weather conditions for the given location_
+* **Partially updating the page** in response to user interactivity
+  _For example, fetching and displaying the current stock price for a user-provided stock index_
 * **Submitting forms** and displaying a success or error messages without needing to reload an entire page.
-  For example: Adding an item to a shopping cart.
+  _For example, Adding an item to a shopping cart_
 
-Fetch's interface only requires a single argument, the `url` to send a request to. The second argument is an object for specifying various options.
+Fetch's interface only requires a single argument—a `url` address to send the request to. The second argument is an object for specifying various options.
 
 ```javascript
   fetch(url, options) // return a Promise
 ```
 As with most asynchronous APIs in JavaScript, `fetch` returns a [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises) that either resolves (succeeds) or rejects (fails) after receiving a response.
 
-Below is a minimal example of using fetch to request a random dog image from [dog.ceo](https://dog.ceo), and displaying the image returned in the page. Open the Web Developer Tools in your browser and select the Network tab to see the HTTP request sent by fetch.
+Below is a minimal example of using fetch to request a random dog image from [dog.ceo](https://dog.ceo). The image returned is then displayed in the page along with the full JSON response. 
+
+If you'd like to see the HTTP requests sent during fetches in your browser, open the Web Developer Tools and select the Network tab.
 
 
 ```javascript
@@ -63,7 +67,7 @@ const fetchDog = () => fetch('https://dog.ceo/api/breeds/image/random')
   <img id="dog" style="width: 100%;" alt="Random dog image" src="https://via.placeholder.com/400" />
 </div>
 
-Below is more complex example that uses multiple options to POST a request to a weather API:
+Below is more complex example that uses multiple options to `POST` a request to a weather API:
 
 ```
 TODO
@@ -71,6 +75,6 @@ TODO
 
 ## Summary
 
-These are only a couple examples of how to use the Fetch API, but enough to indicate it's purpose and capabilities. Read the ["Using the Fetch API"](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch) page on the Mozilla Developer Network for additional examples and complete detail on the Fetch API. Fetch isn't limited to web browsers, it's also available in [Node.js v18](https://nodejs.org/en/blog/announcements/v18-release-announce/#fetch-experimental) and can be used on the server.
+The previous examples only hint at the capabilities of the Fetch API. Read the ["Using the Fetch API"](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch) page on the Mozilla Developer Network (MDN) for more comprehensive examples and detail on the Fetch API. Fetch isn't limited to web browsers—it's also available in [Node.js v18](https://nodejs.org/en/blog/announcements/v18-release-announce/#fetch-experimental) and can be used on the server.
 
 Fetch is an essential API for any dynamic webpage that reacts to user interactivity. If you weren't fetching before, you sure are fetching now.
