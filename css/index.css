@@ -217,3 +217,22 @@ a[href].direct-link:focus:visited,
 :hover > a[href].direct-link:visited {
   color: #aaa;
 }
+
+/* Kids Content Page */
+
+#board {
+   height: 300px;
+   width: 300px;
+   border: 2px solid black;
+}
+
+
+
+.cell {
+  background-color: blue;
+  font-size: 50%;
+}
+
+.row {
+   border: 2px solid green;
+}

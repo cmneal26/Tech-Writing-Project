@@ -1,0 +1,19 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: "Random-d API"
+  description: Public Duck-related API
+servers:
+  - url: https://random-d.uk/api/v2
+paths:
+  /random:
+    get:
+      description: Generate a random duck image URL and message
+      responses:
+        "200":
+          description: Successful retrieved a random duck image 'url' and 'message'
+          example:
+            {
+              "url": "https://random-d.uk/api/images/51.jpg",
+              "message": "Powered by random-d.uk",
+            }

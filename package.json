@@ -1,7 +1,7 @@
 {
   "name": "eleventy-base-blog",
   "version": "6.0.0",
-  "description": "A starter repository for a blog web site using the Eleventy static site generator.",
+  "description": "Free Free API Education",
   "scripts": {
     "build": "npx @11ty/eleventy",
     "predeploy": "npm run build",
@@ -17,9 +17,7 @@
     "url": "git://github.com/11ty/eleventy-base-blog.git"
   },
   "author": {
-    "name": "Zach Leatherman",
-    "email": "zachleatherman@gmail.com",
-    "url": "https://zachleat.com/"
+    "name": "cmneal"
   },
   "license": "MIT",
   "bugs": {
@@ -28,9 +26,11 @@
   "homepage": "https://github.com/11ty/eleventy-base-blog#readme",
   "dependencies": {
     "@11ty/eleventy": "^1.0.1",
+    "@11ty/eleventy-fetch": "^3.0.0",
     "@11ty/eleventy-navigation": "^0.3.3",
     "@11ty/eleventy-plugin-rss": "^1.1.2",
     "@11ty/eleventy-plugin-syntaxhighlight": "^4.0.0",
+    "js-yaml": "^4.1.0",
     "luxon": "^2.4.0",
     "markdown-it": "^13.0.1",
     "markdown-it-anchor": "^8.6.4"
