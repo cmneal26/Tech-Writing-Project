@@ -40,7 +40,24 @@
     </header>
     <main  class="tmpl-our-mission" >
       
-<h2>no content in this file; put in draft/content-file.doc</h2>
+Dont put content in the template, unless there is a special reason for it. Put the content in `our-mission/index.md`
+
+We want authoring to be a pleasant experience. If we can write more in markdown, less in html/other stuff, that will help us focus on the content and the experience of writing.
+
+What you are seeing displayed. The content below this line has been injected into the template, and uses `our-mission/index.md`
+
+There is a safe filter applied to the template's injected content. That makes sure dangerous content isn't injected.
+
+<hr />
+
+<p><strong>replace the content here in <code>our-missions/index.md</code> with the content from <code>drafts/our-mission-content.md</code></strong></p>
+<p>This content wasn't displaying appropriately on the page because I didn't add this line to the <code>template</code> associated with this <code>Markdown</code>.</p>
+<pre><code>
+  {{ content | safe }}
+
+
+</code></pre>
+
     </main>
     <footer></footer>
     <!-- Current page: /Tech-Writing-Project/our-mission/ -->
