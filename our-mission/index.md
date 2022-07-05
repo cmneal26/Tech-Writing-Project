@@ -8,5 +8,5 @@ eleventyNavigation:
 ---
 
 
-[replace this with the content from drafts/our-mission-page-content-draft]
+[replace this with the content from drafts/our-mission-content.docx]
 
