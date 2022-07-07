@@ -1,21 +1,21 @@
 {
-  "title": "Your Blog Name",
-  "url": "https://example.com/",
+  "title": "Free Free API Education",
+  "url": "https://freeTheBirds.com/",
   "language": "en",
-  "description": "I am writing about my experiences as a naval navel-gazer.",
+  "description": "go back to creative writing school.",
   "feed": {
-    "subtitle": "I am writing about my experiences as a naval navel-gazer.",
+    "subtitle": "subtitle for feed.",
     "filename": "feed.xml",
     "path": "/feed/feed.xml",
-    "id": "https://example.com/"
+    "id": "https://feed-the-plant.com/"
   },
   "jsonfeed": {
     "path": "/feed/feed.json",
     "url": "https://example.com/feed/feed.json"
   },
   "author": {
-    "name": "Your Name Here",
-    "email": "youremailaddress@example.com",
-    "url": "https://example.com/about-me/"
+    "name": "putYourNameIfYouWant",
+    "email": "seeAbove",
+    "url": "seeAboveAbove"
   }
 }
