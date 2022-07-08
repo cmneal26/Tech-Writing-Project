@@ -51,20 +51,20 @@ const clearAnalyteTable = () => {
 
   console.log("clearAnalyteTable()")
 
-  const tableDiv = document.getElementById('nalyte-search-output')
+  const tableDiv = document.getElementById('analyte-search-output')
   if (tableDiv) {
      tableDiv.innerHTML = ""
      searchedName = null 
   }
 }
 
-const createAnalyteHtmlTable = (analyteTableData, analyteTableHeader) => {
+const createAnalyteHtmlTable = (analyteTableData) => {
   
   console.log("createAnalyteHtmlTable()")
     
   return `<table id="analyte-table">
          
-         <th id="analyte-table-header">${retrievedAnalyteData.metadata.tableHeaderName}</th>
+         <th id="analyte-table-header">${analyteTableData.metadata.tableHeaderName}</th>
 
          <tr class="analyte-data-row" id="analyte-row1">
            <td class="analyte-data-col" id="analyte-row1-col1">${analyteTableData.row1[0]}</td>
@@ -82,8 +82,8 @@ const createAnalyteHtmlTable = (analyteTableData, analyteTableHeader) => {
           </tr>
 
           <tr class="analyte-data-row" id="analyte-row4">
-             <td class="analyte-data-col" id="analyte-row2-col1">${analyteTableData.row4[0]}</td>
-             <td class="analyte-data-col" id="analyte-row2-col2">${analyteTableData.row4[1]}</td>
+             <td class="analyte-data-col" id="analyte-row4-col1">${analyteTableData.row4[0]}</td>
+             <td class="analyte-data-col" id="analyte-row4-col2">${analyteTableData.row4[1]}</td>
           </tr>
             
         </table>`
@@ -112,17 +112,17 @@ const setAnalyteTable = (dataStringified) => {
   console.log("setAnalyteTable()")
 
   const outputDiv = document.getElementById('analyte-search-output')
-  const searchedAnalyteName = outputDiv || outputDiv.value
+  const searchedAnalyteName = outputDiv ? outputDiv.value : null
 
   if (searchedAnalyteName === null || searchedAnalyteName === "") {
     // no analyte name typed in HTML <input /> box: do nothing onclick
-    return
+    return false
   }
 
-  const data = JSON.parse(dataStringified)   
+  const data = getAnalyte(JSON.parse(dataStringified.data))   
   state.searchedName = searchedAnalyteName
-  outputDiv.innerHTML = createAnalyteHtmlTable(data.data.firstAnalyte, data.metadata.tableHeaderName)
-       
+  outputDiv.innerHTML = createAnalyteHtmlTable(data.firstAnalyte, metadata.tableHeaderName)
+  return true
 }
 
 </script>
@@ -133,7 +133,7 @@ const setAnalyteTable = (dataStringified) => {
 
   <span id="analyte-component">  
     
-    <input type="input" id="retrieve-analytic-input" />
+    <input type="input" id="retrieve-analyte-input" />
           
     <button id="retrieve-analyte" onclick="setAnalyteTable(JSON.stringify([object Object]))">Retrieve Analyte</button>
     <button id="clear-analyte" onclick="clearAnalyteTable()">Clear Analyte</button>
