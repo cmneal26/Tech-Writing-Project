@@ -72,7 +72,7 @@ const setAnalyteTable = (dataStringified) => {
   console.log("setAnalyteTable()")
 
   const outputDiv = document.getElementById('analyte-search-output')
-  const searchedAnalyteName = outputDiv || outputDiv.value
+  const searchedAnalyteName = outputDiv ? outputDiv.value : null
 
   if (searchedAnalyteName === null || searchedAnalyteName === "") {
     // no analyte name typed in HTML <input /> box: do nothing onclick
@@ -93,7 +93,7 @@ const setAnalyteTable = (dataStringified) => {
 
   <span id="analyte-component">  
     
-    <input type="input" id="retrieve-analytic-input" />
+    <input type="input" id="retrieve-analyte-input" />
           
     <button id="retrieve-analyte" onclick="setAnalyteTable(JSON.stringify({{analyteData}}))">Retrieve Analyte</button>
     <button id="clear-analyte" onclick="clearAnalyteTable()">Clear Analyte</button>
