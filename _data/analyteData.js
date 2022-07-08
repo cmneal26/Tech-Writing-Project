@@ -2,7 +2,7 @@ module.exports = function () {
   // each item in data represents a separate analyte record
   // we can convert the excel or .csv file to something like this, if we can't find api
   // look for api first before worrying about this strategy; this is the backup
-  const replaceMeWithRealAnalytes = { // keep same structure, change "firstAnalyte" to name of searched analyte
+  const replaceMeWithRealAnalytes = {
     metadata: {
       tableHeaderName: "RETRIEVED ANALYTE",
     },
