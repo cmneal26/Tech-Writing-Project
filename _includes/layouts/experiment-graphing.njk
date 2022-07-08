@@ -1,0 +1,108 @@
+---
+layout: layouts/base.njk
+templateClass: tmpl-experiment-graphing
+---
+
+<script id="analyte-interaction">
+
+const state = { searchedName: null }
+
+const clearAnalyteTable = () => {
+
+  console.log("clearAnalyteTable()")
+
+  const tableDiv = document.getElementById('nalyte-search-output')
+  if (tableDiv) {
+     tableDiv.innerHTML = ""
+     searchedName = null 
+  }
+}
+
+const createAnalyteHtmlTable = (analyteTableData, analyteTableHeader) => {
+  
+  console.log("createAnalyteHtmlTable()")
+    
+  return `<table id="analyte-table">
+         
+         <th id="analyte-table-header">${retrievedAnalyteData.metadata.tableHeaderName}</th>
+
+         <tr class="analyte-data-row" id="analyte-row1">
+           <td class="analyte-data-col" id="analyte-row1-col1">${analyteTableData.row1[0]}</td>
+           <td class="analyte-data-col" id="analyte-row1-col2">${analyteTableData.row1[1]}</td>
+         </tr>
+
+          <tr class="analyte-data-row" id="analyte-row2">
+             <td class="analyte-data-col" id="analyte-row2-col1">${analyteTableData.row2[0]}</td>
+             <td class="analyte-data-col" id="analyte-row2-col2">${analyteTableData.row2[1]}</td>
+          </tr>
+
+          <tr class="analyte-data-row" id="analyte-row3">
+             <td class="analyte-data-col" id="analyte-row3-col1">${analyteTableData.row3[0]}</td>
+             <td class="analyte-data-col" id="analyte-row3-col2">${analyteTableData.row3[1]}</td>
+          </tr>
+
+          <tr class="analyte-data-row" id="analyte-row4">
+             <td class="analyte-data-col" id="analyte-row2-col1">${analyteTableData.row4[0]}</td>
+             <td class="analyte-data-col" id="analyte-row2-col2">${analyteTableData.row4[1]}</td>
+          </tr>
+            
+        </table>`
+}
+
+const getAnalyte = (analytes, analyteName) => {
+   const analyteKeys = Object.keys(analytes)
+   let analyte;
+   for (key of analyteKeys) {
+   
+     analyte = analytes[key]
+
+     if (analyteName === analyte.name) {
+     
+       return analyte
+     
+     } 
+
+   }
+
+   return analytes["firstAnalyte"] // no match for input box search term
+   
+}
+
+const setAnalyteTable = (dataStringified) => {
+  console.log("setAnalyteTable()")
+
+  const outputDiv = document.getElementById('analyte-search-output')
+  const searchedAnalyteName = outputDiv || outputDiv.value
+
+  if (searchedAnalyteName === null || searchedAnalyteName === "") {
+    // no analyte name typed in HTML <input /> box: do nothing onclick
+    return
+  }
+
+  const data = JSON.parse(dataStringified)   
+  state.searchedName = searchedAnalyteName
+  outputDiv.innerHTML = createAnalyteHtmlTable(data.data.firstAnalyte, data.metadata.tableHeaderName)
+       
+}
+
+</script>
+
+<h1>This is a Temporary Page Used To test some stuff.</h1>
+
+<main id="content-pane">
+
+  <span id="analyte-component">  
+    
+    <input type="input" id="retrieve-analytic-input" />
+          
+    <button id="retrieve-analyte" onclick="setAnalyteTable(JSON.stringify({{analyteData}}))">Retrieve Analyte</button>
+    <button id="clear-analyte" onclick="clearAnalyteTable()">Clear Analyte</button>
+
+    <div id="analyte-search-output"></div>
+
+  </span>
+
+
+</main>
+
+{{ content | safe }}
