@@ -20,6 +20,9 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy("img");
   eleventyConfig.addPassthroughCopy("css");
 
+  // Find and copy any `jpeg` files, maintaining directory structure.
+  
+
   // Add plugins
   eleventyConfig.addPlugin(pluginRss);
   eleventyConfig.addPlugin(pluginSyntaxHighlight);
