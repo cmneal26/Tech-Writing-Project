@@ -1,5 +1,7 @@
 const fs = require("fs");
 const yaml = require("js-yaml");
+const charts = require('eleventy-charts')
+
 
 
 const { DateTime } = require("luxon");
@@ -22,6 +24,7 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPlugin(pluginRss);
   eleventyConfig.addPlugin(pluginSyntaxHighlight);
   eleventyConfig.addPlugin(pluginNavigation);
+  eleventyConfig.addPlugin(charts)
 
   eleventyConfig.addFilter("readableDate", dateObj => {
     return DateTime.fromJSDate(dateObj, {zone: 'utc'}).toFormat("dd LLL yyyy");

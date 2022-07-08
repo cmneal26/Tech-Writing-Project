@@ -36,6 +36,7 @@
     "markdown-it-anchor": "^8.6.4"
   },
   "devDependencies": {
+    "eleventy-charts": "^1.0.3",
     "gh-pages": "^4.0.0"
   }
 }
