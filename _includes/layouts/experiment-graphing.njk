@@ -24,7 +24,7 @@ const createAnalyteHtmlTable = (analyteTableData) => {
     
   return `<table id="analyte-table">
          
-         <th id="analyte-table-header">${analyteData.metadata.tableHeaderName}</th>
+         <th id="analyte-table-header">${analyteTableData.metadata.tableHeaderName}</th>
 
          <tr class="analyte-data-row" id="analyte-row1">
            <td class="analyte-data-col" id="analyte-row1-col1">${analyteTableData.row1[0]}</td>
@@ -76,13 +76,13 @@ const setAnalyteTable = (dataStringified) => {
 
   if (searchedAnalyteName === null || searchedAnalyteName === "") {
     // no analyte name typed in HTML <input /> box: do nothing onclick
-    return
+    return false
   }
 
-  const data = JSON.parse(dataStringified)   
+  const data = getAnalyte(JSON.parse(dataStringified.data))   
   state.searchedName = searchedAnalyteName
-  outputDiv.innerHTML = createAnalyteHtmlTable(data.data.firstAnalyte, data.metadata.tableHeaderName)
-       
+  outputDiv.innerHTML = createAnalyteHtmlTable(data.firstAnalyte, metadata.tableHeaderName)
+  return true
 }
 
 </script>
