@@ -18,13 +18,13 @@ const clearAnalyteTable = () => {
   }
 }
 
-const createAnalyteHtmlTable = (analyteTableData, analyteTableHeader) => {
+const createAnalyteHtmlTable = (analyteTableData) => {
   
   console.log("createAnalyteHtmlTable()")
     
   return `<table id="analyte-table">
          
-         <th id="analyte-table-header">${retrievedAnalyteData.metadata.tableHeaderName}</th>
+         <th id="analyte-table-header">${analyteData.metadata.tableHeaderName}</th>
 
          <tr class="analyte-data-row" id="analyte-row1">
            <td class="analyte-data-col" id="analyte-row1-col1">${analyteTableData.row1[0]}</td>
