@@ -1,6 +1,7 @@
 const fs = require("fs");
 const yaml = require("js-yaml");
 const charts = require('eleventy-charts')
+const Image = require("@11ty/eleventy-img");
 
 
 
@@ -12,6 +13,25 @@ const pluginRss = require("@11ty/eleventy-plugin-rss");
 const pluginSyntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
 const pluginNavigation = require("@11ty/eleventy-navigation");
 
+async function imageShortcode(src, alt, sizes) {
+  let metadata = await Image(src, {
+    widths: [100, 100],
+    formats: ["jpeg"],
+    urlPath: "./img",
+    outputDir: "./docs/img/"
+  });
+
+  let imageAttributes = {
+    alt,
+    sizes,
+    loading: "lazy",
+    decoding: "async",
+  };
+
+  // You bet we throw an error on missing alt in `imageAttributes` (alt="" works okay)
+  return Image.generateHTML(metadata, imageAttributes);
+}
+
 module.exports = function(eleventyConfig) { 
   // Add data extensions  
   eleventyConfig.addDataExtension("yaml", contents => yaml.load(contents));
@@ -19,6 +39,11 @@ module.exports = function(eleventyConfig) {
   // Copy the `img` and `css` folders to the output
   eleventyConfig.addPassthroughCopy("img");
   eleventyConfig.addPassthroughCopy("css");
+
+  eleventyConfig.addNunjucksAsyncShortcode("image", imageShortcode);
+  eleventyConfig.addLiquidShortcode("image", imageShortcode);
+  eleventyConfig.addJavaScriptFunction("image", imageShortcode);
+  
 
   // Add plugins
   eleventyConfig.addPlugin(pluginRss);
