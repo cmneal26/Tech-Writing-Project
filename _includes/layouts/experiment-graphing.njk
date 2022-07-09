@@ -5,40 +5,28 @@ templateClass: tmpl-experiment-graphing
 
 <script id="analyte-interaction">
 
-const state = { searchedName: null }
+</script>
 
-const clearAnalyteTable = () => {
 
-  console.log("clearAnalyteTable()")
-
-  const tableDiv = document.getElementById('analyte-search-output')
-  if (tableDiv) {
-     tableDiv.innerHTML = ""
-     searchedName = null 
-  }
-}
-
-const createAnalyteHtmlTable = (analyteTableData) => {
-  
-  console.log("createAnalyteHtmlTable()")
+var items = [{ title: "foo", id: 1 }, { title: "bar", id: 2}];
     
-  return `<table id="analyte-table">
+   <table id="analyte-table">
          
-         <th id="analyte-table-header">${analyteTableData.metadata.tableHeaderName}</th>
+         <th id="analyte-table-header">Table Header</th>
 
          <tr class="analyte-data-row" id="analyte-row1">
-           <td class="analyte-data-col" id="analyte-row1-col1">${analyteTableData.row1[0]}</td>
-           <td class="analyte-data-col" id="analyte-row1-col2">${analyteTableData.row1[1]}</td>
+           <td class="analyte-data-col" id="analyte-row1-col1">R1C1</td>
+           <td class="analyte-data-col" id="analyte-row1-col2">R1C2</td>
          </tr>
 
           <tr class="analyte-data-row" id="analyte-row2">
-             <td class="analyte-data-col" id="analyte-row2-col1">${analyteTableData.row2[0]}</td>
-             <td class="analyte-data-col" id="analyte-row2-col2">${analyteTableData.row2[1]}</td>
+             <td class="analyte-data-col" id="analyte-row2-col1">R2C1</td>
+             <td class="analyte-data-col" id="analyte-row2-col2">R2C2</td>
           </tr>
 
           <tr class="analyte-data-row" id="analyte-row3">
-             <td class="analyte-data-col" id="analyte-row3-col1">${analyteTableData.row3[0]}</td>
-             <td class="analyte-data-col" id="analyte-row3-col2">${analyteTableData.row3[1]}</td>
+             <td class="analyte-data-col" id="analyte-row3-col1">R2C2</td>
+             <td class="analyte-data-col" id="analyte-row3-col2">R2C2</td>
           </tr>
 
           <tr class="analyte-data-row" id="analyte-row4">
@@ -46,46 +34,8 @@ const createAnalyteHtmlTable = (analyteTableData) => {
              <td class="analyte-data-col" id="analyte-row4-col2">${analyteTableData.row4[1]}</td>
           </tr>
             
-        </table>`
-}
+        </table>
 
-const getAnalyte = (analytes, analyteName) => {
-   const analyteKeys = Object.keys(analytes)
-   let analyte;
-   for (key of analyteKeys) {
-   
-     analyte = analytes[key]
-
-     if (analyteName === analyte.name) {
-     
-       return analyte
-     
-     } 
-
-   }
-
-   return analytes["firstAnalyte"] // no match for input box search term
-   
-}
-
-const setAnalyteTable = (dataStringified) => {
-  console.log("setAnalyteTable()")
-
-  const outputDiv = document.getElementById('analyte-search-output')
-  const searchedAnalyteName = outputDiv ? outputDiv.value : null
-
-  if (searchedAnalyteName === null || searchedAnalyteName === "") {
-    // no analyte name typed in HTML <input /> box: do nothing onclick
-    return false
-  }
-
-  const data = getAnalyte(JSON.parse(dataStringified.data))   
-  state.searchedName = searchedAnalyteName
-  outputDiv.innerHTML = createAnalyteHtmlTable(data.firstAnalyte, metadata.tableHeaderName)
-  return true
-}
-
-</script>
 
 <h1>This is a Temporary Page Used To test some stuff.</h1>
 
