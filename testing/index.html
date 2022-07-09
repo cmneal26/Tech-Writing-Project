@@ -45,89 +45,76 @@
       
 <script id="analyte-interaction">
 
-const state = { searchedName: null }
-
-const clearAnalyteTable = () => {
-
-  console.log("clearAnalyteTable()")
-
-  const tableDiv = document.getElementById('analyte-search-output')
-  if (tableDiv) {
-     tableDiv.innerHTML = ""
-     searchedName = null 
-  }
-}
-
-const createAnalyteHtmlTable = (analyteTableData) => {
-  
-  console.log("createAnalyteHtmlTable()")
-    
-  return `<table id="analyte-table">
-         
-         <th id="analyte-table-header">${analyteTableData.metadata.tableHeaderName}</th>
-
-         <tr class="analyte-data-row" id="analyte-row1">
-           <td class="analyte-data-col" id="analyte-row1-col1">${analyteTableData.row1[0]}</td>
-           <td class="analyte-data-col" id="analyte-row1-col2">${analyteTableData.row1[1]}</td>
-         </tr>
-
-          <tr class="analyte-data-row" id="analyte-row2">
-             <td class="analyte-data-col" id="analyte-row2-col1">${analyteTableData.row2[0]}</td>
-             <td class="analyte-data-col" id="analyte-row2-col2">${analyteTableData.row2[1]}</td>
-          </tr>
-
-          <tr class="analyte-data-row" id="analyte-row3">
-             <td class="analyte-data-col" id="analyte-row3-col1">${analyteTableData.row3[0]}</td>
-             <td class="analyte-data-col" id="analyte-row3-col2">${analyteTableData.row3[1]}</td>
-          </tr>
-
-          <tr class="analyte-data-row" id="analyte-row4">
-             <td class="analyte-data-col" id="analyte-row4-col1">${analyteTableData.row4[0]}</td>
-             <td class="analyte-data-col" id="analyte-row4-col2">${analyteTableData.row4[1]}</td>
-          </tr>
-            
-        </table>`
-}
-
-const getAnalyte = (analytes, analyteName) => {
-   const analyteKeys = Object.keys(analytes)
-   let analyte;
-   for (key of analyteKeys) {
-   
-     analyte = analytes[key]
-
-     if (analyteName === analyte.name) {
-     
-       return analyte
-     
-     } 
-
-   }
-
-   return analytes["firstAnalyte"] // no match for input box search term
-   
-}
-
-const setAnalyteTable = (dataStringified) => {
-  console.log("setAnalyteTable()")
-
-  const outputDiv = document.getElementById('analyte-search-output')
-  const searchedAnalyteName = outputDiv ? outputDiv.value : null
-
-  if (searchedAnalyteName === null || searchedAnalyteName === "") {
-    // no analyte name typed in HTML <input /> box: do nothing onclick
-    return false
+  const retrieveAnalyte = (analyteIdentifier) => {
+       console.info("retrieveAnalyte()")      
   }
 
-  const data = getAnalyte(JSON.parse(dataStringified.data))   
-  state.searchedName = searchedAnalyteName
-  outputDiv.innerHTML = createAnalyteHtmlTable(data.firstAnalyte, metadata.tableHeaderName)
-  return true
-}
+  const clearAnalyte = () => {
+      console.info("clearAnalyte()")
+  }
+
+
 
 </script>
 
-<h1>This is a Temporary Page Used To test some stuff.</h1>
+<div id="analyte-tables">
+
+
+   <table class="analyte-table" id="1">
+         
+         <th id="analyte-table-header">First Analyte</th>
+
+         <tr class="analyte-data-row" id="analyte-row1">
+           <td class="analyte-data-col" id="analyte-row1-col1">col1Value</td>
+           <td class="analyte-data-col" id="analyte-row1-col2">col2Value</td>
+         </tr>
+
+          <tr class="analyte-data-row" id="analyte-row2">
+             <td class="analyte-data-col" id="analyte-row2-col1">col1Value</td>
+             <td class="analyte-data-col" id="analyte-row2-col2">col2Value</td>
+          </tr>
+
+          <tr class="analyte-data-row" id="analyte-row3">
+             <td class="analyte-data-col" id="analyte-row3-col1">col1Value</td>
+             <td class="analyte-data-col" id="analyte-row3-col2">col2Value</td>
+          </tr>
+
+          <tr class="analyte-data-row" id="analyte-row4">
+             <td class="analyte-data-col" id="analyte-row4-col1">col1Value</td>
+             <td class="analyte-data-col" id="analyte-row4-col2">col2Value</td>
+          </tr>
+            
+        </table>
+
+
+   <table class="analyte-table" id="">
+         
+         <th id="analyte-table-header"></th>
+
+         <tr class="analyte-data-row" id="analyte-row1">
+           <td class="analyte-data-col" id="analyte-row1-col1"></td>
+           <td class="analyte-data-col" id="analyte-row1-col2"></td>
+         </tr>
+
+          <tr class="analyte-data-row" id="analyte-row2">
+             <td class="analyte-data-col" id="analyte-row2-col1"></td>
+             <td class="analyte-data-col" id="analyte-row2-col2"></td>
+          </tr>
+
+          <tr class="analyte-data-row" id="analyte-row3">
+             <td class="analyte-data-col" id="analyte-row3-col1"></td>
+             <td class="analyte-data-col" id="analyte-row3-col2"></td>
+          </tr>
+
+          <tr class="analyte-data-row" id="analyte-row4">
+             <td class="analyte-data-col" id="analyte-row4-col1"></td>
+             <td class="analyte-data-col" id="analyte-row4-col2"></td>
+          </tr>
+            
+        </table>
+
+</div>
+
 
 <main id="content-pane">
 
@@ -135,7 +122,7 @@ const setAnalyteTable = (dataStringified) => {
     
     <input type="input" id="retrieve-analyte-input" />
           
-    <button id="retrieve-analyte" onclick="setAnalyteTable(JSON.stringify([object Object]))">Retrieve Analyte</button>
+    <button id="retrieve-analyte" onclick="retrieveAnalyte()">Retrieve Analyte</button>
     <button id="clear-analyte" onclick="clearAnalyteTable()">Clear Analyte</button>
 
     <div id="analyte-search-output"></div>
