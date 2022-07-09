@@ -4,7 +4,7 @@ title: Experiment-Graphing
 templateClass: tmpl-experiment-graphing.njk
 eleventyNavigation:
   key: Experiment-Graphing
-  order: 7
+  order: 5
 ---
 
 ### Testing injecting data and graphing that data.

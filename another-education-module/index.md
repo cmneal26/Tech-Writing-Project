@@ -4,7 +4,7 @@ title: Another-Education-Module
 templateClass: tmpl-rebranding-perry.njk
 eleventyNavigation:
   key: Another-Education-Module
-  order: 6
+  order: 7
 ---
 
 # Applying The Free Free API Education Education Methodology To A Document
