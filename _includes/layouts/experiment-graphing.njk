@@ -1,0 +1,68 @@
+---
+layout: layouts/base.njk
+templateClass: tmpl-experiment-graphing
+---
+
+<script id="analyte-interaction">
+
+  const retrieveAnalyte = (analyteIdentifier) => {
+       console.info("retrieveAnalyte()")      
+  }
+
+  const clearAnalyte = () => {
+      console.info("clearAnalyte()")
+  }
+
+
+
+</script>
+
+<div id="analyte-tables">
+{% for analyte in analyteData.data %}
+
+   <table class="analyte-table" id="{{analyte.id}}">
+         
+         <th id="analyte-table-header">{{analyte.name}}</th>
+
+         <tr class="analyte-data-row" id="analyte-row1">
+           <td class="analyte-data-col" id="analyte-row1-col1">{{analyte.row1[0]}}</td>
+           <td class="analyte-data-col" id="analyte-row1-col2">{{analyte.row1[1]}}</td>
+         </tr>
+
+          <tr class="analyte-data-row" id="analyte-row2">
+             <td class="analyte-data-col" id="analyte-row2-col1">{{analyte.row2[0]}}</td>
+             <td class="analyte-data-col" id="analyte-row2-col2">{{analyte.row2[1]}}</td>
+          </tr>
+
+          <tr class="analyte-data-row" id="analyte-row3">
+             <td class="analyte-data-col" id="analyte-row3-col1">{{analyte.row3[0]}}</td>
+             <td class="analyte-data-col" id="analyte-row3-col2">{{analyte.row3[1]}}</td>
+          </tr>
+
+          <tr class="analyte-data-row" id="analyte-row4">
+             <td class="analyte-data-col" id="analyte-row4-col1">{{analyte.row4[0]}}</td>
+             <td class="analyte-data-col" id="analyte-row4-col2">{{analyte.row4[1]}}</td>
+          </tr>
+            
+        </table>
+{% endfor %}
+</div>
+
+
+<main id="content-pane">
+
+  <span id="analyte-component">  
+    
+    <input type="input" id="retrieve-analyte-input" />
+          
+    <button id="retrieve-analyte" onclick="retrieveAnalyte()">Retrieve Analyte</button>
+    <button id="clear-analyte" onclick="clearAnalyteTable()">Clear Analyte</button>
+
+    <div id="analyte-search-output"></div>
+
+  </span>
+
+
+</main>
+
+{{ content | safe }}
