@@ -5,6 +5,19 @@ templateClass: tmpl-kids
 
 <div id="game">
     <script>
+
+        const setSnakeBackground = (squareId) => {
+            // assign the html elements such that squareId = the element ID
+            const snakeSquare = document.getElementById(squareId)
+            snakeSquare.className = "snake"
+        }
+
+        const setMongooseBackground = (squareId) => {
+            // assign the html elements such that squareId = the element ID
+            const mongooseSquare = document.getElementById(squareId)
+            mongooseSquare.className = "mongoose"
+        }
+
         const apiBaseUrl = "http://tttapi.herokuapp.com/api/v1"
         let gameState;
         const resetGameState = () => {
@@ -156,11 +169,13 @@ templateClass: tmpl-kids
         const play = () => {
             console.log("now playing TTT")
             resetGameState()
+            setSnakeBackground("0")
+            setMongooseBackground("1")
             // selectRandomOpponent()
-            clearBoard()
+            {# clearBoard()
             clearCells()
             setPlayerTurn('O')
-            gameState.playing = true
+            gameState.playing = true #}
         }
     </script>
     <div id="game-section">
