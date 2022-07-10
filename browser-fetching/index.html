@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How to fetch data using a web browser</title>
+    <meta name="description" content="go back to creative writing school.">
+    <meta name="generator" content="Eleventy v1.0.1">
+
+    <link rel="stylesheet" href="/Tech-Writing-Project/css/index.css">
+    <link rel="stylesheet" href="/Tech-Writing-Project/css/prism-base16-monokai.dark.css">
+    <link rel="stylesheet" href="/Tech-Writing-Project/css/prism-diff.css">
+    <link rel="alternate" href="/Tech-Writing-Project/feed/feed.xml" type="application/atom+xml" title="Free Free API Education">
+    <link rel="alternate" href="/Tech-Writing-Project/feed/feed.json" type="application/json" title="Free Free API Education">
+  </head>
+  <body>
+    <header>
+      <h1 class="home"><a href="/Tech-Writing-Project/">Free Free API Education</a></h1>
+      <ul class="nav">
+        <li class="nav-item"><a href="/Tech-Writing-Project/">Home</a></li>
+        <li class="nav-item"><a href="/Tech-Writing-Project/api/api-reference/">Transparency</a></li>
+        <li class="nav-item nav-item-active"><a href="/Tech-Writing-Project/browser-fetching/">Fetch</a></li>
+        <li class="nav-item"><a href="/Tech-Writing-Project/our-mission/">Our Mission</a></li>
+        <li class="nav-item"><a href="/Tech-Writing-Project/kids/">Kids</a></li>
+        <li class="nav-item"><a href="/Tech-Writing-Project/testing/">Experiment-Graphing</a></li>
+        <li class="nav-item"><a href="/Tech-Writing-Project/another-education-module/">Another-Education-Module</a></li>
+        <li class="nav-item"><a href="/Tech-Writing-Project/our-methodology/">Our Methodology</a></li>
+      </ul>
+    </header>
+
+    <main>
+      <h1 id="aren't-you-fetching!" tabindex="-1">Aren't you fetching?! <a class="direct-link" href="#aren't-you-fetching!" aria-hidden="true">#</a></h1>
+<p><em>I'm uncomfortable, you're probably uncomfortable, let's move on to fetching in the web browser</em>.</p>
+<p>All modern web browsers supply a Fetch API for making a HTTP request to a web server, and handling the data returned from the server. The Fetch API provides a programming interface to asynchronously exchange data with a web server without needing to load another web page.</p>
+<p>It's useful to web developers in scenarios such as:</p>
+<ul>
+<li><strong>Displaying dynamic data</strong> that changes over time<br>
+<em>For example, fetching current weather conditions for the given location</em></li>
+<li><strong>Partially updating the page</strong> in response to user interactivity<br>
+<em>For example, fetching and displaying the current stock price for a user-provided stock index</em></li>
+<li><strong>Submitting forms</strong> and displaying a success or error messages without needing to reload an entire page.<br>
+<em>For example, Adding an item to a shopping cart</em></li>
+</ul>
+<p>Fetch's interface only requires a single <a href="https://codeburst.io/parameters-arguments-in-javascript-eb1d8bd0ef04">argument</a>—a <code>url</code> address to send the request to. The second argument is an <a href="https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Basics">object</a> for specifying various options.</p>
+<pre class="language-javascript"><code class="language-javascript">  <span class="token function">fetch</span><span class="token punctuation">(</span>url<span class="token punctuation">,</span> options<span class="token punctuation">)</span></code></pre>
+<p>As with most asynchronous APIs in JavaScript, <code>fetch</code> returns a <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises">Promise</a> that either resolves (succeeds) or rejects (fails) after receiving a response.</p>
+<p>Below is a minimal example of using fetch to request a random dog image from <a href="https://dog.ceo">dog.ceo</a>. The image returned is then displayed in the page along with the full JSON response.</p>
+<p>If you'd like to see the HTTP requests sent during fetches in your browser, open the Web Developer Tools and select the Network tab.</p>
+<pre class="language-javascript"><code class="language-javascript"><span class="token keyword">const</span> <span class="token function-variable function">fetchDog</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token function">fetch</span><span class="token punctuation">(</span><span class="token string">'https://dog.ceo/api/breeds/image/random'</span><span class="token punctuation">)</span><br>  <span class="token comment">// Resolve the JSON returned from the url</span><br>  <span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token parameter">response</span> <span class="token operator">=></span> response<span class="token punctuation">.</span><span class="token function">json</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><br>  <span class="token comment">// Display the image and the raw JSON in the page</span><br>  <span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token parameter">result</span> <span class="token operator">=></span> <span class="token punctuation">{</span><br>    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>result<span class="token punctuation">)</span><br>    <span class="token comment">// Get a reference to the dog image and update the image source</span><br>    <span class="token keyword">const</span> dogImage <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">querySelector</span><span class="token punctuation">(</span><span class="token string">'#dog'</span><span class="token punctuation">)</span><br>    dogImage<span class="token punctuation">.</span>src <span class="token operator">=</span> result<span class="token punctuation">.</span>message<br>    <span class="token comment">// Ges a reference to a the &lt;pre> element and insert the fetch results inside. </span><br>    <span class="token keyword">const</span> resultsElement <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">querySelector</span><span class="token punctuation">(</span><span class="token string">'#dog-results'</span><span class="token punctuation">)</span><br>    resultsElement<span class="token punctuation">.</span>innerHTML <span class="token operator">=</span> <span class="token constant">JSON</span><span class="token punctuation">.</span><span class="token function">stringify</span><span class="token punctuation">(</span>result<span class="token punctuation">)</span><br>  <span class="token punctuation">}</span><span class="token punctuation">)</span><br>  <span class="token comment">// Log any errors to the developer console</span><br>  <span class="token punctuation">.</span><span class="token function">catch</span><span class="token punctuation">(</span><span class="token parameter">error</span> <span class="token operator">=></span> console<span class="token punctuation">.</span><span class="token function">error</span><span class="token punctuation">(</span>error<span class="token punctuation">)</span><span class="token punctuation">)</span></code></pre>
+<script>
+const fetchDog = () => fetch('https://dog.ceo/api/breeds/image/random')
+  .then(response => response.json())
+  .then(result => {
+    console.log(result)
+    document.querySelector('#dog').src = result.message
+    document.querySelector('#dog-results').innerHTML = JSON.stringify(result, null, 2)
+  })
+  .catch(error => console.error(error))
+</script>
+<p><button onclick="fetchDog()">Call the <code>fetchDog</code> function</button></p>
+<h4 id="json-from-the-response:" tabindex="-1">JSON from the response: <a class="direct-link" href="#json-from-the-response:" aria-hidden="true">#</a></h4>
+<pre class="language-javascript" id="dog-results">Nothing fetched yet.</pre>
+<h4 id="image-from-the-response:" tabindex="-1">Image from the response: <a class="direct-link" href="#image-from-the-response:" aria-hidden="true">#</a></h4>
+<div style="width: 400px;">
+  <img id="dog" style="width: 100%;" alt="Random dog image" src="https://via.placeholder.com/400" />
+</div>
+<h2 id="summary" tabindex="-1">Summary <a class="direct-link" href="#summary" aria-hidden="true">#</a></h2>
+<p>The previous example only hint at the capabilities of the Fetch API. Read the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch">&quot;Using the Fetch API&quot;</a> page on the Mozilla Developer Network (MDN) for more comprehensive examples and detail on the Fetch API. Fetch isn't limited to web browsers—it's also available in <a href="https://nodejs.org/en/blog/announcements/v18-release-announce/#fetch-experimental">Node.js v18</a> and can be used on the server.</p>
+<p>Fetch is an essential API for any dynamic webpage that reacts to user interactivity. If you weren't fetching before, you sure are fetching now.</p>
+
+    </main>
+
+    <footer></footer>
+
+    <!-- Current page: /Tech-Writing-Project/browser-fetching/ -->
+  </body>
+</html>
