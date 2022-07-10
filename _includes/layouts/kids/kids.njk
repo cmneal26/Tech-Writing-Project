@@ -172,28 +172,28 @@ templateClass: tmpl-kids
             setSnakeBackground("0")
             setMongooseBackground("1")
             // selectRandomOpponent()
-            {# clearBoard()
+            clearBoard()
             clearCells()
             setPlayerTurn('O')
-            gameState.playing = true #}
+            gameState.playing = true
         }
     </script>
     <div id="game-section">
         <table id="board">
             <tr class="row">
-                <td class="cell" id="0" onclick="clickCell('0')"></td>
-                <td class="cell" id="1" onclick="clickCell('1')"></td>
-                <td class="cell" id="2" onclick="clickCell('2')"></td>
+                <td class="cell mongoose" id="0" onclick="clickCell('0')"></td>
+                <td class="cell snake" id="1" onclick="clickCell('1')"></td>
+                <td class="cell mongoose" id="2" onclick="clickCell('2')"></td>
             </tr>
             <tr class="row">
-                <td class="cell" id="3" onclick="clickCell('3')"></td>
-                <td class="cell" id="4" onclick="clickCell('4')"></td>
-                <td class="cell" id="5" onclick="clickCell('5')"></td>
+                <td class="cell snake" id="3" onclick="clickCell('3')"></td>
+                <td class="cell mongoose" id="4" onclick="clickCell('4')"></td>
+                <td class="cell snake" id="5" onclick="clickCell('5')"></td>
             </tr>
             <tr class="row">
-                <td class="cell" id="6" onclick="clickCell('6')"></td>
-                <td class="cell" id="7" onclick="clickCell('7')"></td>
-                <td class="cell" id="8" onclick="clickCell('8')"></td>
+                <td class="cell mongoose" id="6" onclick="clickCell('6')"></td>
+                <td class="cell mongoose" id="7" onclick="clickCell('7')"></td>
+                <td class="cell mongoose" id="8" onclick="clickCell('8')"></td>
             </tr>
         </table>
         <span>
