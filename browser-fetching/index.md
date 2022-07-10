@@ -10,7 +10,7 @@ eleventyNavigation:
 
 _I'm uncomfortable, you're probably uncomfortable, let's move on to fetching in the web browser_.
 
-All modern web browsers supply a Fetch API for making a HTTP requests to a web server, and handling the data returned from the server. The Fetch API provides a programming interface to asynchronously exchange data with a web server without needing to load another web page.
+All modern web browsers supply a Fetch API for making a HTTP request to a web server, and handling the data returned from the server. The Fetch API provides a programming interface to asynchronously exchange data with a web server without needing to load another web page.
 
 It's useful to web developers in scenarios such as:
 
@@ -21,10 +21,10 @@ It's useful to web developers in scenarios such as:
 * **Submitting forms** and displaying a success or error messages without needing to reload an entire page.
   _For example, Adding an item to a shopping cart_
 
-Fetch's interface only requires a single argument—a `url` address to send the request to. The second argument is an object for specifying various options.
+Fetch's interface only requires a single [argument](https://codeburst.io/parameters-arguments-in-javascript-eb1d8bd0ef04)—a `url` address to send the request to. The second argument is an [object](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Basics) for specifying various options.
 
 ```javascript
-  fetch(url, options) // return a Promise
+  fetch(url, options)
 ```
 As with most asynchronous APIs in JavaScript, `fetch` returns a [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises) that either resolves (succeeds) or rejects (fails) after receiving a response.
 
@@ -40,8 +40,12 @@ const fetchDog = () => fetch('https://dog.ceo/api/breeds/image/random')
   // Display the image and the raw JSON in the page
   .then(result => {
     console.log(result)
-    document.querySelector('#dog').src = result.message
-    document.querySelector('#dog-results').innerHTML = JSON.stringify(result, null, 2)
+    // Get a reference to the dog image and update the image source
+    const dogImage = document.querySelector('#dog')
+    dogImage.src = result.message
+    // Ges a reference to a the <pre> element and insert the fetch results inside. 
+    const resultsElement = document.querySelector('#dog-results')
+    resultsElement.innerHTML = JSON.stringify(result)
   })
   // Log any errors to the developer console
   .catch(error => console.error(error))
@@ -67,14 +71,9 @@ const fetchDog = () => fetch('https://dog.ceo/api/breeds/image/random')
   <img id="dog" style="width: 100%;" alt="Random dog image" src="https://via.placeholder.com/400" />
 </div>
 
-Below is more complex example that uses multiple options to `POST` a request to a weather API:
-
-```
-TODO
-```
 
 ## Summary
 
-The previous examples only hint at the capabilities of the Fetch API. Read the ["Using the Fetch API"](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch) page on the Mozilla Developer Network (MDN) for more comprehensive examples and detail on the Fetch API. Fetch isn't limited to web browsers—it's also available in [Node.js v18](https://nodejs.org/en/blog/announcements/v18-release-announce/#fetch-experimental) and can be used on the server.
+The previous example only hint at the capabilities of the Fetch API. Read the ["Using the Fetch API"](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch) page on the Mozilla Developer Network (MDN) for more comprehensive examples and detail on the Fetch API. Fetch isn't limited to web browsers—it's also available in [Node.js v18](https://nodejs.org/en/blog/announcements/v18-release-announce/#fetch-experimental) and can be used on the server.
 
 Fetch is an essential API for any dynamic webpage that reacts to user interactivity. If you weren't fetching before, you sure are fetching now.
