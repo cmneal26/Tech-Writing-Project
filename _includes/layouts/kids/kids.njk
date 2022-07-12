@@ -5,7 +5,29 @@ templateClass: tmpl-kids
 
 <div id="game">
     <script>
+        // game data
+        const IN_PROGRESS = 'in progress'
+        const TIE = 'tie'
+        const WIN = 'win'
 
+        const DEFAULT_GAME_STATE = {
+          board: "---------",
+          playerTurn: 'O', // human player is always O, goes first
+          playing: false,
+          winner: null,
+          opponent: { // update this later using selectRandomOpponent()
+            name: "Shirkhan"
+          }
+        }
+
+        // functions to set DOM
+        const clearCells = () => {
+              const cellIds = ['0', '1', '2', '3', '4', '5', '6', '7', '8']
+              cellIds.forEach(cellId => {
+                const cell = document.getElementById(cellId)
+                cell.innerText = ''
+              })
+        }
         const setSnakeBackground = (squareId) => {
             // assign the html elements such that squareId = the element ID
             const snakeSquare = document.getElementById(squareId)
@@ -17,167 +39,168 @@ templateClass: tmpl-kids
             const mongooseSquare = document.getElementById(squareId)
             mongooseSquare.className = "mongoose"
         }
+        // functions to handle the non-visual game play elements
 
-        const apiBaseUrl = "http://tttapi.herokuapp.com/api/v1"
-        let gameState;
-        const resetGameState = () => {
-            gameState = {
-                playerTurn: 'O', // human player is always O, goes first
-                playing: false,
-                winner: null,
-                opponent: { // update this later using selectRandomOpponent()
-                    name: "Shirkhan"
-                }
-            }
-        }
-        let board = '---------'
-        String.prototype.replaceAt = function (index, replacement) {
-            return this.substring(0, index) + replacement + this.substring(index + replacement.length);
-        }
-        const createFullUrl = (board, player) => {
-            return `${apiBaseUrl}/${board}/${player}`
-        }
-        const setPlayerTurn = (player) => {
-            gameState.playerTurn = player
-        }
+String.prototype.replaceAt = function(index, replacement) {
+  return this.substring(0, index) + replacement + this.substring(index + replacement.length);
+}
 
-        const getEmptySquares = () => {
-            // use for dumb TTT opponent; return array of empty square indexes
-        }
+function getRandomInt(max) {
+  // HELP; use the internet!
+  // returns random int with maximum value of max
+  // your code goes here
+}
 
-        const selectRandomOpponent = () => {
-            // random opponent array of objects; lives in this function 
-           // return a random opponent from that array 
-        }
+const getEmptySquares = (board) => {
+  // HELP!
+  // use for dumb TTT opponent; return array of empty square indexes
+  const emptySquares = []
+  // your code goes here
+  return emptySquares
+}
+const selectRandomOpponent = () => {
+  // random opponent array of objects; lives in this function 
+  // return a random opponent from that array 
+}
+const setOpponent = (opponent) => {
+  // update game state with new opponent
+  // update visual box to right of TTT game with opponent data, including power level  
+}
 
-        const setOpponent = (opponent) => {
-           // update game state with new opponent
-           // update visual box to right of TTT game with opponent data, including power level  
-        }
+const getDumbOpponentMove = (gameState) => { 
+  // HELP ME! use getEmptySquares!  
+  // your code goes here
+  return emptySquares[randomChoice]
+}
 
-        const computerTurn = () => {
-            fetch(createFullUrl(board, 'X')).then(response => response.json()).then(data => {
-                console.info("fetched data:", data)
-                const computerMove = data.recommendation
-                const cellId = computerMove.toString()
-                let cell;
-                // cell occupied already: use first open square seen
-                if (board.charAt(cellId) === '-') {
-                    cell = document.getElementById(cellId)
-                } else {
-                    cell = document.getElementById(board.indexOf('-').toString())
-                }
-                
-                console.info(`computer moves to cell ${computerMove}`)
-                move(board, computerMove, 'X')
-                cell = document.getElementById(computerMove.toString())
-                cell.innerText = 'X'
-                // check win before changing turns
-                setPlayerTurn('O')
-            })
-        }
-        const clickCell = (cellId) => {
-            console.info("inside clickCell, cellId:", cellId)
-            if (gameState && gameState.playing && (gameState.winner === null)) { // human is always O
-                const cell = typeof(cellId) === 'number'
-                    ? document.getElementById(cellId.toString())
-                    : document.getElementById(cellId)
-                // only update cell if human turn and cell not empty
-                if (board.charAt(cellId) === '-' && gameState.playerTurn === 'O') {
-                    // update board data and visuals
-                    cell.innerText = 'O'
-                    move(board, 'O', cellId)
-                    console.info("update player turn", board)
-                    console.info("gamestate", gameState)
-                    setPlayerTurn('X')
-                    const message = document.getElementById('game-state-message')
-                    message.innerText = `${gameState.opponent.name} is deciding on a move`
-                    computerTurn()
-                    message.innerText = `${gameState.opponent.name} made a move. Fight Bravely!`
-                    console.info("computer took turn")
-                }
-                return true // update on click
-            }
-            return false // no update on click            
-        }
-        const setBoard = (newBoard) => {
-            board = newBoard
-        }
-        const clearCells = () => {
-            const cellIds = ['0', '1', '2','3','4','5','6','7','8']
-            cellIds.forEach(cellId => {
-                const cell = document.getElementById(cellId)
-                cell.innerText = ''
-            })
-        }
-        const clearBoard = () => {
-            board = '---------'
-        }
-        const move = (board, player, location) => {
-            return board.replaceAt(location, player)
-        }
-        const checkGameStatus = () => {
-            // top row
-            if (
-                board.charAt(0) !== '-' &&
-                (board.charAt(0) === board.charAt(1)) &&
-                (board.charAt(1) === board.charAt(2))
-            ) {}
-            // middle row
-            if (
-                board.charAt(3) !== '-' &&
-                (board.charAt(3) === board.charAt(4)) &&
-                (board.charAt(4) === board.charAt(5))
-            ) {}
-            // right row
-            if (
-                board.charAt(6) !== '-' &&
-                (board.charAt(6) === board.charAt(7)) &&
-                (board.charAt(7) === board.charAt(8))
-            ) {}
-            // left col
-            if (
-                board.charAt(0) !== '-' &&
-                (board.charAt(0) === board.charAt(3)) &&
-                (board.charAt(3) === board.charAt(6))
-            ) {}
-            // middle col
-            if (
-                board.charAt(1) !== '-' &&
-                (board.charAt(1) === board.charAt(4)) &&
-                (board.charAt(4) === board.charAt(7))
-            ) {}
-            // right col
-            if (
-                board.charAt(6) !== '-' &&
-                (board.charAt(6) === board.charAt(7)) &&
-                (board.charAt(7) === board.charAt(8))
-            ) {}
-            // left-top-start diagonal
-            if (
-                board.charAt(6) !== '-' &&
-                (board.charAt(6) === board.charAt(7)) &&
-                (board.charAt(7) === board.charAt(8))
-            ) {}
-            // right-top-start diagonal
-            if (
-                board.charAt(6) !== '-' &&
-                (board.charAt(6) === board.charAt(7)) &&
-                (board.charAt(7) === board.charAt(8))
-            ) {}
-        }
-        const play = () => {
-            console.log("now playing TTT")
-            resetGameState()
-            setSnakeBackground("0")
-            setMongooseBackground("1")
-            // selectRandomOpponent()
-            clearBoard()
-            clearCells()
-            setPlayerTurn('O')
-            gameState.playing = true
-        }
-    </script>
+const resetGameState = (gameState, newGameState) => {
+  gameState.board = newGameState.board
+  gameState.playerTurn = newGameState.playerTurn
+  gameState.playing = newGameState.playing
+  gameState.winner = newGameState.winner
+  gameState.opponent = newGameState.opponent
+}
+
+function move(gameState, squareIndex) {
+  gameState.board = gameState.board.replaceAt(squareIndex, gameState.playerTurn);
+}
+
+const setPlayerTurn = (gameState, player) => {
+  if (player) {
+    gameState.playerTurn = player
+  } else {
+    gameState.playerTurn = gameState.playerTurn === 'X' ? 'O' : 'X'
+  }
+}
+
+const checkGameStatus = (board) => {
+  // top row
+  if (
+    board.charAt(0) !== '-' &&
+    (board.charAt(0) === board.charAt(1)) &&
+    (board.charAt(1) === board.charAt(2))
+  ) {
+    return WIN
+  }
+  // middle row
+  if (
+    board.charAt(3) !== '-' &&
+    (board.charAt(3) === board.charAt(4)) &&
+    (board.charAt(4) === board.charAt(5))
+  ) {
+    return WIN
+  }
+  // right row
+  if (
+    board.charAt(6) !== '-' &&
+    (board.charAt(6) === board.charAt(7)) &&
+    (board.charAt(7) === board.charAt(8))
+  ) {
+    return WIN
+  }
+  // left col
+  if (
+    board.charAt(0) !== '-' &&
+    (board.charAt(0) === board.charAt(3)) &&
+    (board.charAt(3) === board.charAt(6))
+  ) {
+    return WIN
+  }
+  // middle col
+  if (
+    board.charAt(1) !== '-' &&
+    (board.charAt(1) === board.charAt(4)) &&
+    (board.charAt(4) === board.charAt(7))
+  ) {
+    return WIN
+  }
+  // right col
+  if (
+    board.charAt(6) !== '-' &&
+    (board.charAt(6) === board.charAt(7)) &&
+    (board.charAt(7) === board.charAt(8))
+  ) {
+    return WIN
+  }
+  // left-top-start diagonal
+  if (
+    board.charAt(6) !== '-' &&
+    (board.charAt(6) === board.charAt(7)) &&
+    (board.charAt(7) === board.charAt(8))
+  ) {
+    return WIN
+  }
+  // right-top-start diagonal
+  if (
+    board.charAt(6) !== '-' &&
+    (board.charAt(6) === board.charAt(7)) &&
+    (board.charAt(7) === board.charAt(8))
+  ) {
+    return WIN
+  }
+
+  if (getEmptySquares(board).length !== 0) {
+    return IN_PROGRESS
+  } else { // 
+    return TIE
+  }
+
+}
+
+
+const play = () => {
+  let playerTurns = 0
+  const gameState = {}
+  let gameStatus;
+  console.log("now playing TTT")
+  resetGameState(gameState, DEFAULT_GAME_STATE)
+  gameState.playing = true
+
+  while (gameState.playing) {
+    playerTurns += 1
+    const turnMove = getDumbOpponentMove(gameState)
+    move(gameState, turnMove)
+    gameStatus = checkGameStatus(gameState.board)
+    if (gameStatus !== IN_PROGRESS) {
+      break;
+    }
+    // change player turn
+    setPlayerTurn(gameState)
+  }
+
+  console.log("play done, game state:", gameState)
+
+  if (gameStatus === WIN) {
+    console.info(`\n${gameState.playerTurn} wins`)
+    gameState.winner = true
+  } else {
+    console.info("The Game is a tie!")
+  }
+
+  gameState.playing = false
+}
+
+</script>
     <div id="game-section">
         <table id="board">
             <tr class="row">
@@ -188,16 +211,16 @@ templateClass: tmpl-kids
             <tr class="row">
                 <td class="cell snake" id="3" onclick="clickCell('3')"></td>
                 <td class="cell mongoose" id="4" onclick="clickCell('4')"></td>
-                <td class="cell snake" id="5" onclick="clickCell('5')"></td>
+                <td class="cell mongoose" id="5" onclick="clickCell('5')"></td>
             </tr>
             <tr class="row">
-                <td class="cell mongoose" id="6" onclick="clickCell('6')"></td>
-                <td class="cell mongoose" id="7" onclick="clickCell('7')"></td>
-                <td class="cell mongoose" id="8" onclick="clickCell('8')"></td>
+                <td class="cell snake" id="6" onclick="clickCell('6')"></td>
+                <td class="cell snake" id="7" onclick="clickCell('7')"></td>
+                <td class="cell snake" id="8" onclick="clickCell('8')"></td>
             </tr>
         </table>
         <span>
-            <button id="play-button" onclick="play()">
+            <button id="play-button" onclick="">
                 Play TTT
             </button>
         </span>
