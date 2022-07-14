@@ -3,8 +3,8 @@ layout: layouts/base.njk
 templateClass: tmpl-kids
 ---
 
-<div id="games">
-    <script id="snakes-and-mongooses">
+<div id="game">
+    <script>
         // game data
         const IN_PROGRESS = 'in progress'
         const TIE = 'tie'
@@ -199,147 +199,9 @@ const play = () => {
 
   gameState.playing = false
 }
-</script>
-<script id="a-duck-strikes-back">
-
-const UP = "ArrowUp";
-const DOWN = "ArrowDown";
-const LEFT = "ArrowLeft";
-const RIGHT = "ArrowRight";
-
-document.addEventListener("DOMContentLoaded", (event) => {
-  const gameState = {
-    score: 0,
-    playing: false,
-    size: 10,
-    location: [25, 25],
-    velocity: 5,
-    duckImage: new Image(),
-    duckImageContext: document
-      .getElementById("duck-hunt-canvas")
-      .getContext("2d")
-  };
-
-  function setDuckImage() {
-    const duckImage = new Image();
-    gameState.duckImage = duckImage;
-    gameState.duckImage.src = "duck.png"; // Set source path
-    gameState.duckImage.id = "duck-image";
-    gameState.duckImage.tabIndex = "1";
-  }
-
-  document.getElementById("play").addEventListener("click", play);
-
-  function down(keyEvent) {
-    // moves duck
-    console.log("key presssed", keyEvent);
-    console.log("location before change", gameState.location);
-    // only move duck if playing game
-    if (!gameState.playing) return;
-
-    if (keyEvent.code === UP) {
-      // move duck up
-      updateLocation([
-        gameState.location[0],
-        gameState.location[1] + gameState.velocity
-      ]);
-    } else if (keyEvent.code === DOWN) {
-      // move duck down
-      updateLocation([
-        gameState.location[0],
-        gameState.location[1] - gameState.velocity
-      ]);
-    } else if (keyEvent.code === LEFT) {
-      // move duck left
-      updateLocation([
-        gameState.location[0] - gameState.velocity,
-        gameState.location[1]
-      ]);
-    } else if (keyEvent.code === RIGHT) {
-      // move duck right
-      updateLocation([
-        gameState.location[0] + gameState.velocity,
-        gameState.location[1]
-      ]);
-    }
-    console.log("location after change", gameState.location);
-    gameState.duckImageContext = document
-      .getElementById("duck-hunt-canvas")
-      .getContext("2d");
-    setDuckImage();
-    drawDuck();
-  }
-
-  function updateLocation(newLocation) {
-    gameState.location = newLocation;
-  }
-
-  function gameOver() {
-    gameState.playing = false;
-  }
-
-  function gameStart() {
-    gameState.playing = true;
-  }
-
-  function play() {
-    console.info("playing");
-    resetGameState({
-      score: 0,
-      playing: true,
-      size: 10,
-      location: [25, 25],
-      duckImage: null,
-      duckImageContext: null
-    });
-    gameStart();
-  }
-
-  function resetGameState(newGameState) {
-    gameState.score = newGameState.score;
-    gameState.duckImage = null;
-    gameState.duckImageContext = null;
-    gameState.playing = false;
-    gameState.size = 10;
-    gameState.location = [25, 25];
-    setDuckImage();
-  }
-
-  function incrementScore() {
-    gameState.score = gameState.score + 1;
-  }
-
-  function drawDuck() {
-    console.log("maybe a duck drawn");
-    if (gameState.duckImageContext) {
-      console.log("------------------\na duck drawn");
-      gameState.duckImageContext.drawImage(
-        gameState.duckImage,
-        gameState.location[0],
-        gameState.location[1],
-        gameState.size,
-        gameState.size
-      );
-    }
-  }
-
-  function draw() {
-    console.info("drawing");
-    const scoreElement = document.getElementById("score");
-    document.body.onkeydown = (event) => down(event);
-    drawDuck();
-    scoreElement.innerText = `${gameState.score}`;
-  }
-  // draws duck, sets up onkeydown
-  draw();
-});
-
-
-
-
 
 </script>
-    <div id="snakes-and-mongooses-game-section">
+    <div id="game-section">
         <table id="board">
             <tr class="row">
                 <td class="cell mongoose" id="0" onclick="clickCell('0')"></td>
@@ -363,25 +225,4 @@ document.addEventListener("DOMContentLoaded", (event) => {
             </button>
         </span>
         <p id="game-state-message">Press the 'Play' button And Click a square</p>
-    </div>
-
-    <div id="a-duck-strikes-back-game-section">
-
-      <div id="duck-game">
-        <center>
-          <h2>Revenge of the Ducks: A Duck Strikes Back</h2>
-        </center>
-          <div id="game-info">
-            <span>
-              {% image "./img/ duck.png", "a cunning duck", "100vw", "duck-score-image" %}
-              
-              <h4>Score</h4>
-              <h4 id="score"></h4>
-            </span>
-            <button type="button" id="play">Play</button>
-          </div>
-          <center>
-            <canvas id="duck-hunt-canvas" width="500" height="500"></canvas>
-          </center>
-        </div>
     </div>

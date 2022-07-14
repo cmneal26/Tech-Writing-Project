@@ -220,12 +220,13 @@ a[href].direct-link:focus:visited,
 
 /* Kids Content Page */
 
-/* Snakes And Mongooses */
 #board {
    height: 300px;
    width: 300px;
    border: 2px solid black;
 }
+
+
 
 .cell {
   background-color: blue;
@@ -236,23 +237,6 @@ a[href].direct-link:focus:visited,
 .row {
    border: 2px solid green;
 }
-
-/* Duck Game */
-
-canvas {
-  border: 5px solid blue;
-}
-
-#duck-score-image {
-  width: 50px;
-  height: 50px;
-}
-
-#game-info {
-  margin-left: 100px;
-}
-
-
 
 /* Home */
 
