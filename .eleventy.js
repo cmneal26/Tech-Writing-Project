@@ -13,15 +13,16 @@ const pluginRss = require("@11ty/eleventy-plugin-rss");
 const pluginSyntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
 const pluginNavigation = require("@11ty/eleventy-navigation");
 
-async function imageShortcode(src, alt, sizes) {
+async function imageShortcode(src, alt, sizes, id) {
   let metadata = await Image(src, {
     widths: [100, 100],
-    formats: ["jpeg"],
+    formats: ["jpeg", "png"],
     urlPath: "./img",
     outputDir: "./docs/img/"
   });
 
   let imageAttributes = {
+    id,
     alt,
     sizes,
     loading: "lazy",
