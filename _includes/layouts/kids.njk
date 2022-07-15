@@ -70,7 +70,7 @@ const setOpponent = (opponent) => {
 const getDumbOpponentMove = (gameState) => { 
   // HELP ME! use getEmptySquares!  
   // your code goes here
-  return emptySquares[randomChoice]
+  //return emptySquares[randomChoice]
 }
 
 const resetGameState = (gameState, newGameState) => {
@@ -223,12 +223,12 @@ document.addEventListener("DOMContentLoaded", (event) => {
   function setDuckImage() {
     const duckImage = new Image();
     gameState.duckImage = duckImage;
-    gameState.duckImage.src = "duck.png"; // Set source path
+    gameState.duckImage.src = "../img/duck.png"; // Set source path
     gameState.duckImage.id = "duck-image";
     gameState.duckImage.tabIndex = "1";
   }
 
-  document.getElementById("play").addEventListener("click", play);
+  document.getElementById("play-duck-game").addEventListener("click", playDuckGame);
 
   function down(keyEvent) {
     // moves duck
@@ -282,7 +282,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
     gameState.playing = true;
   }
 
-  function play() {
+  function playDuckGame() {
     console.info("playing");
     resetGameState({
       score: 0,
@@ -373,12 +373,13 @@ document.addEventListener("DOMContentLoaded", (event) => {
         </center>
           <div id="game-info">
             <span>
-              {% image "./img/duck.png", "a cunning duck", "100vw", "duck-score-image" %}
+              {% image "./img/duck.png", "a cunning duck", "100vw", "duck-score-image", "png", "../img" %}
               
               <h4>Score</h4>
               <h4 id="score"></h4>
+              <h4 id="instructions">Hit 'Play' And Press the left/right/up/down arrow keys to move the duck</h4>
             </span>
-            <button type="button" id="play">Play</button>
+            <button type="button" id="play-duck-game">Play</button>
           </div>
           <center>
             <canvas id="duck-hunt-canvas" width="500" height="500"></canvas>
