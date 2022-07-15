@@ -30,7 +30,7 @@ As with most asynchronous APIs in JavaScript, `fetch` returns a [Promise](https:
 
 Below is a minimal example of using fetch to request a random dog image from [dog.ceo](https://dog.ceo). The image returned is then displayed in the page along with the full JSON response. 
 
-If you'd like to see the HTTP requests sent during fetches in your browser, open the Web Developer Tools and select the Network tab.
+If you'd like to see the HTTP requests sent during fetches in your browser, open the _Web Developer Tools_ in your browser (`Command`+`Option`+`i` on macOS, or `Control`+`Shift`+`i` on Windows/Linux) and select the _Console_ tab.
 
 
 ```javascript
@@ -71,6 +71,10 @@ const fetchDog = () => fetch('https://dog.ceo/api/breeds/image/random')
   <img id="dog" style="width: 100%;" alt="Random dog image" src="https://via.placeholder.com/400" />
 </div>
 
+The HTTP request to fetch the dog data is reflected in the _Network_ tab, and the data from the fetched response can be inspected in the Console panel. 
+Below is an example of the data in the Web Developer tools.
+
+![Screenshot of dog data as an JavaScript object](../img/devtools-console-example.png)
 
 ## Summary
 
