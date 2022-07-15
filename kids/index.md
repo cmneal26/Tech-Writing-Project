@@ -1,5 +1,5 @@
 ---
-layout: layouts/kids/kids.njk
+layout: layouts/kids.njk
 title: Kids
 templateClass: tmpl-kids
 eleventyNavigation:
