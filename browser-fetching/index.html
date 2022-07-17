@@ -31,15 +31,15 @@
     <main>
       <h1 id="aren't-you-fetching!" tabindex="-1">Aren't you fetching?! <a class="direct-link" href="#aren't-you-fetching!" aria-hidden="true">#</a></h1>
 <p><em>I'm uncomfortable, you're probably uncomfortable, let's move on to fetching in the web browser</em>.</p>
-<p>All modern web browsers supply a Fetch API for making a HTTP request to a web server, and handling the data returned from the server. The Fetch API provides a programming interface to asynchronously exchange data with a web server without needing to load another web page.</p>
+<p>All modern web browsers supply a Fetch API for making an HTTP request to a web server, and handling the data returned from the server. The Fetch API provides a programming interface to asynchronously exchange data with a web server without needing to load another web page.</p>
 <p>It's useful to web developers in scenarios such as:</p>
 <ul>
-<li><strong>Displaying dynamic data</strong> that changes over time<br>
+<li><strong>Displaying dynamic data</strong> that changes over time.<br>
 <em>For example, fetching current weather conditions for the given location</em></li>
-<li><strong>Partially updating the page</strong> in response to user interactivity<br>
+<li><strong>Partially updating the page</strong> in response to user interactivity.<br>
 <em>For example, fetching and displaying the current stock price for a user-provided stock index</em></li>
 <li><strong>Submitting forms</strong> and displaying a success or error messages without needing to reload an entire page.<br>
-<em>For example, Adding an item to a shopping cart</em></li>
+<em>For example, adding an item to a shopping cart</em></li>
 </ul>
 <p>Fetch's interface only requires a single <a href="https://codeburst.io/parameters-arguments-in-javascript-eb1d8bd0ef04">argument</a>—a <code>url</code> address to send the request to. The second argument is an <a href="https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Basics">object</a> for specifying various options.</p>
 <pre class="language-javascript"><code class="language-javascript">  <span class="token function">fetch</span><span class="token punctuation">(</span>url<span class="token punctuation">,</span> options<span class="token punctuation">)</span></code></pre>
@@ -64,12 +64,14 @@ const fetchDog = () => fetch('https://dog.ceo/api/breeds/image/random')
 <div style="width: 400px;">
   <img id="dog" style="width: 100%;" alt="Random dog image" src="https://via.placeholder.com/400" />
 </div>
-<p>The HTTP request to fetch the dog data is reflected in the <em>Network</em> tab, and the data from the fetched response can be inspected in the Console panel.<br>
-Below is an example of the data in the Web Developer tools.</p>
-<p><img src="../img/devtools-console-example.png" alt="Screenshot of dog data as an JavaScript object"></p>
+<p>The HTTP request to fetch the dog data is reflected in the <em>Network</em> tab, and the data from the fetched response can be inspected in the <em>Console</em> panel.<br>
+Below is an example of the data in the <em>Web Developer Tools</em>.</p>
+<p><img src="../img/devtools-console-example.png" alt="Screenshot of dog data as a JavaScript object"></p>
+<p><a href="https://codepen.io/ingrey1-the-typescripter/pen/vYRKepE">Go to this codepen containing the example code</a> if you want to experiment more.</p>
 <h2 id="summary" tabindex="-1">Summary <a class="direct-link" href="#summary" aria-hidden="true">#</a></h2>
-<p>The previous example only hint at the capabilities of the Fetch API. Read the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch">&quot;Using the Fetch API&quot;</a> page on the Mozilla Developer Network (MDN) for more comprehensive examples and detail on the Fetch API. Fetch isn't limited to web browsers—it's also available in <a href="https://nodejs.org/en/blog/announcements/v18-release-announce/#fetch-experimental">Node.js v18</a> and can be used on the server.</p>
+<p>The previous example only hints at the capabilities of the Fetch API. Read the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch">&quot;Using the Fetch API&quot;</a> page on the Mozilla Developer Network (MDN) for more comprehensive examples and detail on the Fetch API. Fetch isn't limited to web browsers—it's also available in <a href="https://nodejs.org/en/blog/announcements/v18-release-announce/#fetch-experimental">Node.js v18</a> and can be used on the server.</p>
 <p>Fetch is an essential API for any dynamic webpage that reacts to user interactivity. If you weren't fetching before, you sure are fetching now.</p>
+<p><button>Continue to next lesson</button></p>
 
     </main>
 
