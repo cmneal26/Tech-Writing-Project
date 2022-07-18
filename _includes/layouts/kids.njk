@@ -333,12 +333,133 @@ document.addEventListener("DOMContentLoaded", (event) => {
   // draws duck, sets up onkeydown
   draw();
 });
+</script>
+<script>
+  window.addEventListener("DOMContentLoaded", (event) => {
+  const chessApiUrlBase = "https://www.chessdb.cn/cdb.php";
 
+  const letters = ["A", "B", "C", "D", "E", "F", "G", "H"];
 
+  const gameState = {
+    lastOpponentMove: null,
+    opponent: {
+      name: "Shirkhan",
+    },
+    board: null,
+  };
 
+  const setVisualBoard = () => {
+    const board = createVisualBoard();
+    const boardContainer = document.getElementById("chess-table-container");
+    boardContainer.innerHTML = board;
+  };
 
+  createVisualHeader = () => {
+    let header = "";
+
+    letters.forEach((letter) => {
+      header += `<td class="letter" id="table-data-header-${letter.toLowerCase()}">${
+        "  " + letter
+      }</td>`;
+    });
+
+    return header;
+  };
+
+  createVisualColumns = () => {
+    let columns = "";
+    letters.forEach((letter, index) => {
+      columns += `<td  class="game-col" id="game-col-${index + 1}"></td>`;
+    });
+    return columns;
+  };
+
+  createVisualRows = () => {
+    let rows = "";
+    letters.forEach((letter, index) => {
+      rows += `<tr class="game-row" id="game-row-${letter}${
+        index + 1
+      }">${createVisualColumns()}</tr>`;
+    });
+    return rows;
+  };
+
+  const createVisualBoard = () => {
+    // returns html table 8x8
+    return `
+    <table id="chess-board">
+     <thead id="top-header>
+      <tr id="table-header-row">
+       ${createVisualHeader()}
+      </tr>
+      ${createVisualRows()}
+     </thead>
+    </table>`;
+  };
+
+  const createDataBoard = () => {
+    const board = {};
+    const letters = ["a", "b", "c", "d", "e", "f", "g", "h"];
+
+    for (let letter of letters) {
+      board[letter] = {};
+      for (let currentNum = 1; currentNum <= 8; currentNum++) {
+        board[letter][currentNum] = null;
+      }
+    }
+    return board;
+  };
+
+  const generateQueryParams = () => {
+    const params =
+      "action=querybest&board=rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR%20w%20KQkq%20-%200%201&json=1";
+    return "?" + params;
+  };
+
+  const generateFullUrl = () => chessApiUrlBase + generateQueryParams();
+
+  const opponentMovesPiece = () => {
+    console.info("opponentMovesPiece()");
+
+    fetch(generateFullUrl())
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("fetched data", JSON.stringify(data, 2));
+        updateLog(data.move, gameState.opponent.name);
+        gameState.lastOpponentMove = data.move;
+        console.info("gameState", gameState);
+      });
+  };
+
+  const createLogItem = (moveString, opponent) => {
+    console.info("createLogItem");
+    const from = moveString.substring(0, 2);
+    const to = moveString.substring(2);
+    return `<p>${opponent} moves from ${from} to ${to}</p>`;
+  };
+
+  const updateLog = (moveString, opponentName) => {
+    console.log("updateLog()");
+    const logElement = document.getElementById("log");
+    console.info("createLogItem()", createLogItem(moveString, opponentName));
+    logElement.innerHTML += createLogItem(moveString, opponentName);
+  };
+
+  const play = () => {
+    gameState.board = createDataBoard();
+    setVisualBoard();
+  };
+
+  play();
+  console.info("board", gameState.board);
+  // event listeners
+  const opponentMovesButton = document.getElementById("click-to-let-opp-move");
+  opponentMovesButton.addEventListener("click", opponentMovesPiece);
+});
 
 </script>
+
+
     <div id="snakes-and-mongooses-game-section">
         <table id="board">
             <tr class="row">
@@ -385,4 +506,15 @@ document.addEventListener("DOMContentLoaded", (event) => {
             <canvas id="duck-hunt-canvas" width="500" height="500"></canvas>
           </center>
         </div>
+    </div>
+
+      <div>
+      <center>
+        <h2 id="title">Magic Chess</h2>
+      </center>
+      <main>
+        <button id="click-to-let-opp-move">Go ahead and make your move!</button>
+        <div id="log"></div>
+        <div id="chess-table-container"></div>
+      </main>
     </div>

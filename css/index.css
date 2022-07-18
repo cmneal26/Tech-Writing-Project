@@ -252,7 +252,22 @@ canvas {
   margin-left: 100px;
 }
 
+/* Magic Chess Game */
 
+.table-header-row {
+  background-color: blueviolet;
+}
+
+.game-col {
+  background-color: cyan;
+  width: 50px;
+  height: 50px;
+  background-image: url(https://www.google.com/aclk?sa=L&ai=DChcSEwjg9d7044H5AhUF5cgKHbGwABQYABAFGgJxdQ&sig=AOD64_3Bg1vx-Y9C4BUJQCEDwQwU91YToQ&adurl&ctype=5&ved=2ahUKEwi-28n044H5AhUCQkIHHaKdDKUQvhd6BAgBEDs);
+}
+
+#chess-table-container {
+  text-align: center;
+}
 
 /* Home */
 
