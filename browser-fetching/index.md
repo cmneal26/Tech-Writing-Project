@@ -16,8 +16,10 @@ It's useful to web developers in scenarios such as:
 
 * **Displaying dynamic data** that changes over time.  
   _For example, fetching current weather conditions for the given location_
+
 * **Partially updating the page** in response to user interactivity.  
   _For example, fetching and displaying the current stock price for a user-provided stock index_
+
 * **Submitting forms** and displaying a success or error messages without needing to reload an entire page.  
   _For example, adding an item to a shopping cart_
 
