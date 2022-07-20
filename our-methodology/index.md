@@ -4,7 +4,7 @@ title: Our Methodology
 templateClass: tmpl-our-methodology
 eleventyNavigation:
   key: Our Methodology
-  order: 8
+  order: 4
 ---
 
 ### Revolutionary program

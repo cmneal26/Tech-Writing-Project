@@ -4,7 +4,7 @@ title: Our Mission
 templateClass: tmpl-our-mission
 eleventyNavigation:
   key: Our Mission
-  order: 4
+  order: 3
 ---
 
 
