@@ -241,13 +241,13 @@ document.addEventListener("DOMContentLoaded", (event) => {
       // move duck up
       updateLocation([
         gameState.location[0],
-        gameState.location[1] + gameState.velocity
+        gameState.location[1] - gameState.velocity
       ]);
     } else if (keyEvent.code === DOWN) {
       // move duck down
       updateLocation([
         gameState.location[0],
-        gameState.location[1] - gameState.velocity
+        gameState.location[1] + gameState.velocity
       ]);
     } else if (keyEvent.code === LEFT) {
       // move duck left

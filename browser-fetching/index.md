@@ -3,7 +3,7 @@ layout: layouts/base.njk
 title: How to fetch data using a web browser
 eleventyNavigation:
   key: Fetch
-  order: 4
+  order: 2
 ---
 
 # Aren't you fetching?!

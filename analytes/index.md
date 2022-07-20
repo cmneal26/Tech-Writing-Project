@@ -1,9 +1,9 @@
 ---
 layout: layouts/experiment-graphing.njk
-title: Experiment-Graphing
+title: Analytes
 templateClass: tmpl-experiment-graphing.njk
 eleventyNavigation:
-  key: Experiment-Graphing
+  key: Analytes
   order: 5
 ---
 

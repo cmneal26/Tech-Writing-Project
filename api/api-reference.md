@@ -4,7 +4,7 @@ title: Transparency
 templateClass: tmpl-transparency
 eleventyNavigation:
   key: Transparency
-  order: 4
+  order: 1
 ---
 
 

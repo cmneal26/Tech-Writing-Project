@@ -4,7 +4,7 @@ title: Kids
 templateClass: tmpl-kids
 eleventyNavigation:
   key: Kids
-  order: 5
+  order: 6
 ---
 
 # TTT WITH DUMB COMPUTER PLAYER
