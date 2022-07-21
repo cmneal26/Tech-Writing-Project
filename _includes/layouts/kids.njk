@@ -235,7 +235,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
     gameState.duckImage = duckImage;
     gameState.duckImage.src = "../img/duck.png"; // Set source path
     gameState.duckImage.id = "duck-image";
-    //gameState.duckImage.tabIndex = "1";
   }
 
   function setFlowerImage() {
@@ -331,7 +330,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
         gameState.location[1]
       ]);
     }
-    console.log("location after change", gameState.location); 
+    
     handleImageUpdates();
     duckEatsFlower() 
   }
@@ -421,18 +420,13 @@ document.addEventListener("DOMContentLoaded", (event) => {
   }
 
   function updateScoreText() {
-     
     const scoreElement = document.getElementById("score")
     scoreElement.innerText = gameState.score
-
   }
 
   function duckEatsFlower() {
     const distance = getDistanceBetween()
-    console.log("distance", distance) 
     if (distance <= gameState.size) { // touching flower
-       // increement score
-       console.info("duckEatsFlower() action")
        respawnFlower()
        handleImageUpdates()
        incrementScore()
