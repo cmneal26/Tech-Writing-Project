@@ -202,22 +202,30 @@ const play = () => {
 </script>
 <script id="a-duck-strikes-back">
 
+// arrow down key event names
 const UP = "ArrowUp";
 const DOWN = "ArrowDown";
 const LEFT = "ArrowLeft";
 const RIGHT = "ArrowRight";
+const CANVAS_DIMENSIONS = 500
+const STARTING_LOCATION = [250, 250]
+
+// the pond ends 25 pixels from canvas edge
+const SAFE_DUCK_DISTANCE = 25
+// canvas boundaries
+const POND_BOUNDARIES = {north: {y: SAFE_DUCK_DISTANCE}, south: { y: 500 - SAFE_DUCK_DISTANCE}, east: {x: 500 - SAFE_DUCK_DISTANCE}, west: {x: SAFE_DUCK_DISTANCE} } 
+
 
 document.addEventListener("DOMContentLoaded", (event) => {
   const gameState = {
     score: 0,
     playing: false,
-    size: 10,
-    location: [25, 25],
+    size: 20,
+    location: STARTING_LOCATION,
+    flowerLocation: [50, 50],
     velocity: 5,
-    duckImage: new Image(),
-    duckImageContext: document
-      .getElementById("duck-hunt-canvas")
-      .getContext("2d")
+    duckImage: null,
+    flowerImage: null
   };
 
   function setDuckImage() {
@@ -228,15 +236,66 @@ document.addEventListener("DOMContentLoaded", (event) => {
     gameState.duckImage.tabIndex = "1";
   }
 
+  function setFlowerImage() {
+    const flowerImage = new Image();
+    gameState.flowerImage = flowerImage;
+    gameState.flowerImage.src = "../img/flower.jpeg"; // Set source path
+    gameState.flowerImage.id = "flower-image";
+  }
+
+  setDuckImage()
+  setFlowerImage()
+
   document.getElementById("play-duck-game").addEventListener("click", playDuckGame);
+  document.getElementById("clear-duck-game").addEventListener("click", resetGameState);
+
+  function isInsidePond() {
+    // the duck must stay in the pond
+    // returns true if duck is in pond
+
+    // check north pond boundary
+    if (gameState.location[1] - gameState.velocity < POND_BOUNDARIES.north.y) {
+      console.info("WILL HIT NORTH BOUNDARY")  
+      return false
+    }
+    // check south pond boundary
+    if (gameState.location[1] + gameState.velocity > POND_BOUNDARIES.south.y) {
+      console.info("WILL HIT SOUTH BOUNDARY")   
+      return false
+    }
+    // check east pond boundary
+    if (gameState.location[0] + gameState.velocity > POND_BOUNDARIES.east.x) {
+      console.info("WILL HIT EAST BOUNDARY") 
+      return false
+    }
+    // check west pond boundary
+    if (gameState.location[0] - gameState.velocity < POND_BOUNDARIES.west.x) {
+      console.info("WILL HIT WEST BOUNDARY") 
+      return false
+    }
+
+    // handleUpdates();
+
+    return true // duck in pond
+   
+  }
+
+  function handleImageUpdates() {
+    drawDuck();
+    drawFlower();
+  }
 
   function down(keyEvent) {
     // moves duck
-    console.log("key presssed", keyEvent);
-    console.log("location before change", gameState.location);
+
     // only move duck if playing game
     if (!gameState.playing) return;
 
+    // duck cannot leave pond
+    if (!isInsidePond()) {
+      return
+    }
+   
     if (keyEvent.code === UP) {
       // move duck up
       updateLocation([
@@ -262,12 +321,8 @@ document.addEventListener("DOMContentLoaded", (event) => {
         gameState.location[1]
       ]);
     }
-    console.log("location after change", gameState.location);
-    gameState.duckImageContext = document
-      .getElementById("duck-hunt-canvas")
-      .getContext("2d");
-    setDuckImage();
-    drawDuck();
+    console.log("location after change", gameState.location); 
+    handleImageUpdates(); 
   }
 
   function updateLocation(newLocation) {
@@ -284,25 +339,9 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
   function playDuckGame() {
     console.info("playing");
-    resetGameState({
-      score: 0,
-      playing: true,
-      size: 10,
-      location: [25, 25],
-      duckImage: null,
-      duckImageContext: null
-    });
     gameStart();
-  }
-
-  function resetGameState(newGameState) {
-    gameState.score = newGameState.score;
-    gameState.duckImage = null;
-    gameState.duckImageContext = null;
-    gameState.playing = false;
-    gameState.size = 10;
-    gameState.location = [25, 25];
-    setDuckImage();
+    handleImageUpdates()
+    console.info("gameState", gameState)
   }
 
   function incrementScore() {
@@ -310,33 +349,39 @@ document.addEventListener("DOMContentLoaded", (event) => {
   }
 
   function drawDuck() {
-    console.log("maybe a duck drawn");
-    if (gameState.duckImageContext) {
-      console.log("------------------\na duck drawn");
-      gameState.duckImageContext.drawImage(
+    const canvas = document.getElementById('duck-hunt-canvas');
+    const context = canvas.getContext('2d');
+    context.drawImage(
         gameState.duckImage,
         gameState.location[0],
         gameState.location[1],
         gameState.size,
         gameState.size
       );
-    }
   }
 
-  function draw() {
+  const drawFlower = () => {
+    const canvas = document.getElementById('duck-hunt-canvas');
+    const context = canvas.getContext('2d');
+    context.drawImage(
+        gameState.flowerImage,
+        gameState.flowerLocation[0],
+        gameState.flowerLocation[1],
+        gameState.size,
+        gameState.size
+      );
+  }
+
+  function begin() {
     console.info("drawing");
-    const scoreElement = document.getElementById("score");
-    document.body.onkeydown = (event) => down(event);
-    drawDuck();
-    scoreElement.innerText = `${gameState.score}`;
+    document.body.onkeydown = (event) => {
+      down(event)
+      // draw images after key change
+    };
+
   }
-  // draws duck, sets up onkeydown
-  draw();
+  begin();
 });
-
-
-
-
 
 </script>
     <div id="snakes-and-mongooses-game-section">
@@ -374,12 +419,13 @@ document.addEventListener("DOMContentLoaded", (event) => {
           <div id="game-info">
             <span>
               {% image "./img/duck.png", "a cunning duck", "100vw", "duck-score-image", "png", "../img" %}
-              
+              {% image "./img/flower.jpeg", "a mysterious glowing flower", "100vw", "flower-for-duck-score-image", "jpeg", "../img" %}
               <h4>Score</h4>
               <h4 id="score"></h4>
               <h4 id="instructions">Hit 'Play' And Press the left/right/up/down arrow keys to move the duck</h4>
             </span>
             <button type="button" id="play-duck-game">Play</button>
+            <button type="button" id="clear-duck-game">Clear Game</button>
           </div>
           <center>
             <canvas id="duck-hunt-canvas" width="500" height="500"></canvas>
