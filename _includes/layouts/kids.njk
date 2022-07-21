@@ -226,7 +226,8 @@ document.addEventListener("DOMContentLoaded", (event) => {
     velocity: 5,
     duckImage: null,
     flowerImage: null,
-    backgroundImage: null
+    backgroundImage: null,
+    flowerTimer: null
   };
 
   function setDuckImage() {
@@ -234,7 +235,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
     gameState.duckImage = duckImage;
     gameState.duckImage.src = "../img/duck.png"; // Set source path
     gameState.duckImage.id = "duck-image";
-    gameState.duckImage.tabIndex = "1";
+    //gameState.duckImage.tabIndex = "1";
   }
 
   function setFlowerImage() {
@@ -331,7 +332,8 @@ document.addEventListener("DOMContentLoaded", (event) => {
       ]);
     }
     console.log("location after change", gameState.location); 
-    handleImageUpdates(); 
+    handleImageUpdates();
+    duckEatsFlower() 
   }
 
   function updateLocation(newLocation) {
@@ -346,11 +348,28 @@ document.addEventListener("DOMContentLoaded", (event) => {
     gameState.playing = true;
   }
 
+  function getRandomInt(max) {
+  return Math.floor(Math.random() * max);
+}
+
+  function respawnFlower() {
+    const newLocationCoords = SAFE_DUCK_DISTANCE * 2 + getRandomInt(CANVAS_DIMENSIONS / 2)
+    gameState.flowerLocation = [newLocationCoords, newLocationCoords]
+    drawBackgroundImage()
+    handleImageUpdates()  
+  }
+
+  function setFlowerTimer() {
+    const FLOWER_DEATH = 5000
+    gameState.timer = setInterval(respawnFlower, FLOWER_DEATH )
+  }
+
   function playDuckGame() {
     console.info("playing");
     gameStart()
     drawBackgroundImage()
     handleImageUpdates()
+    setFlowerTimer()
     console.info("gameState", gameState)
   }
 
@@ -394,6 +413,35 @@ document.addEventListener("DOMContentLoaded", (event) => {
       );
   }
 
+  function getDistanceBetween() {
+    console.info("flowerLoc", gameState.flowerLocation)
+     const x1 = gameState.location[0]
+     const y1 = gameState.location[1]
+     const x2 = gameState.flowerLocation[0]
+     const y2 = gameState.flowerLocation[1]
+     return Math.floor( Math.sqrt((x2 - x1) ** 2 / (y2 - y1) ** 2)) 
+  }
+
+  function updateScoreText() {
+     
+    const scoreElement = document.getElementById("score")
+    scoreElement.innerText = gameState.score
+
+  }
+
+  function duckEatsFlower() {
+    const distance = getDistanceBetween()
+    console.log("distance", distance) 
+    if (distance <= gameState.size) { // touching flower
+       // increement score
+       console.info("duckEatsFlower() action")
+       respawnFlower()
+       handleImageUpdates()
+       incrementScore()
+       updateScoreText()
+    }
+  }
+
   function begin() {
     console.info("drawing");
     document.body.onkeydown = (event) => {
@@ -401,11 +449,33 @@ document.addEventListener("DOMContentLoaded", (event) => {
       // draw images after key change
     };
   }
+  
   begin();
 });
 
 </script>
+
+<div id="games-container">
+
+<div id="a-duck-strikes-back-game-section">
+  <div id="duck-game">
+    <center>
+      <h2>Revenge of the Ducks: A Duck Strikes Back</h2>
+      <div id="duck-game-info">
+          {% image "./img/duck.png", "a cunning duck", "100vw", "duck-score-image", "png", "../img" %}
+          {% image "./img/flower.jpeg", "a mysterious glowing flower", "100vw", "flower-for-duck-score-image", "jpeg", "../img", [25, 25] %}
+        <button type="button" id="play-duck-game">Play</button>
+        <button type="button" id="clear-duck-game">Clear Game</button>
+      </div>
+        <canvas tabindex=0 id="duck-hunt-canvas" width="500" height="500"></canvas>
+      </center>
+    </div>
+</div>
+
+    
     <div id="snakes-and-mongooses-game-section">
+        <center>
+         <h2>Snakes and Mongooses</h2> 
         <table id="board">
             <tr class="row">
                 <td class="cell mongoose" id="0" onclick="clickCell('0')"></td>
@@ -425,31 +495,11 @@ document.addEventListener("DOMContentLoaded", (event) => {
         </table>
         <span>
             <button id="play-button" onclick="">
-                Play TTT
+                Play
             </button>
         </span>
         <p id="game-state-message">Press the 'Play' button And Click a square</p>
+      </center>
     </div>
 
-    <div id="a-duck-strikes-back-game-section">
-
-      <div id="duck-game">
-        <center>
-          <h2>Revenge of the Ducks: A Duck Strikes Back</h2>
-        </center>
-          <div id="game-info">
-            <span>
-              {% image "./img/duck.png", "a cunning duck", "100vw", "duck-score-image", "png", "../img" %}
-              {% image "./img/flower.jpeg", "a mysterious glowing flower", "100vw", "flower-for-duck-score-image", "jpeg", "../img" %}
-              <h4>Score</h4>
-              <h4 id="score"></h4>
-              <h4 id="instructions">Hit 'Play' And Press the left/right/up/down arrow keys to move the duck</h4>
-            </span>
-            <button type="button" id="play-duck-game">Play</button>
-            <button type="button" id="clear-duck-game">Clear Game</button>
-          </div>
-          <center>
-            <canvas id="duck-hunt-canvas" width="500" height="500"></canvas>
-          </center>
-        </div>
     </div>
