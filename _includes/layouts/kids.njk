@@ -413,13 +413,11 @@ document.addEventListener("DOMContentLoaded", (event) => {
       );
   }
 
-  function getDistanceBetween() {
-    console.info("flowerLoc", gameState.flowerLocation)
-     const x1 = gameState.location[0]
-     const y1 = gameState.location[1]
-     const x2 = gameState.flowerLocation[0]
-     const y2 = gameState.flowerLocation[1]
-     return Math.floor( Math.sqrt((x2 - x1) ** 2 / (y2 - y1) ** 2)) 
+  function getDistanceBetween() { 
+    const x = gameState.location[0] - gameState.flowerLocation[0];
+    const y = gameState.location[1] - gameState.flowerLocation[1];
+    
+    return Math.floor(Math.sqrt(x ** 2 + y ** 2));
   }
 
   function updateScoreText() {
@@ -466,6 +464,8 @@ document.addEventListener("DOMContentLoaded", (event) => {
           {% image "./img/flower.jpeg", "a mysterious glowing flower", "100vw", "flower-for-duck-score-image", "jpeg", "../img", [25, 25] %}
         <button type="button" id="play-duck-game">Play</button>
         <button type="button" id="clear-duck-game">Clear Game</button>
+        <br />
+        <p id="score"></p>
       </div>
         <canvas tabindex=0 id="duck-hunt-canvas" width="500" height="500"></canvas>
       </center>
