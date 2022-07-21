@@ -302,7 +302,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
     // duck cannot leave pond
     if (!isInsidePond()) {
-      return
+      gameState.location = STARTING_LOCATION
     }
    
     if (keyEvent.code === UP) {
