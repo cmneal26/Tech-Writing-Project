@@ -82,11 +82,6 @@
   </url>
   
   <url>
-    <loc>https://freethebirds.com/Tech-Writing-Project/tags/another-tag/</loc>
-    <lastmod>2022-07-21</lastmod>
-  </url>
-  
-  <url>
     <loc>https://freethebirds.com/Tech-Writing-Project/tags/second-tag/</loc>
     <lastmod>2022-07-21</lastmod>
   </url>
@@ -98,6 +93,11 @@
   
   <url>
     <loc>https://freethebirds.com/Tech-Writing-Project/tags/posts-with-two-tags/</loc>
+    <lastmod>2022-07-21</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://freethebirds.com/Tech-Writing-Project/tags/another-tag/</loc>
     <lastmod>2022-07-21</lastmod>
   </url>
 </urlset>

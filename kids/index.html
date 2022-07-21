@@ -250,7 +250,8 @@ document.addEventListener("DOMContentLoaded", (event) => {
     flowerLocation: [50, 50],
     velocity: 5,
     duckImage: null,
-    flowerImage: null
+    flowerImage: null,
+    backgroundImage: null
   };
 
   function setDuckImage() {
@@ -268,6 +269,14 @@ document.addEventListener("DOMContentLoaded", (event) => {
     gameState.flowerImage.id = "flower-image";
   }
 
+  function setBackgroundImage() {
+    const backgroundImage = new Image();
+    gameState.backgroundImage = backgroundImage;
+    gameState.backgroundImage.src = "../img/duck-canvas-background.png"; // Set source path
+    gameState.backgroundImage.id = "canvas-background-image";
+  }
+
+  setBackgroundImage()
   setDuckImage()
   setFlowerImage()
 
@@ -364,7 +373,8 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
   function playDuckGame() {
     console.info("playing");
-    gameStart();
+    gameStart()
+    drawBackgroundImage()
     handleImageUpdates()
     console.info("gameState", gameState)
   }
@@ -397,13 +407,24 @@ document.addEventListener("DOMContentLoaded", (event) => {
       );
   }
 
+  const drawBackgroundImage = () => {
+    const canvas = document.getElementById('duck-hunt-canvas');
+    const context = canvas.getContext('2d');
+    context.drawImage(
+        gameState.backgroundImage,
+        0,
+        0,
+        CANVAS_DIMENSIONS,
+        CANVAS_DIMENSIONS
+      );
+  }
+
   function begin() {
     console.info("drawing");
     document.body.onkeydown = (event) => {
       down(event)
       // draw images after key change
     };
-
   }
   begin();
 });
