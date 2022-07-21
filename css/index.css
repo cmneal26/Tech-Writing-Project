@@ -262,10 +262,13 @@ canvas {
   height: 50px;
 }
 
-#game-info {
-  margin-left: 100px;
+#duck-game-info {
+  margin: 10px;
 }
 
+#games-container {
+  background-color: #AFEEEE;
+}
 
 
 /* Home */
