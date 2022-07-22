@@ -1,0 +1,19 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: "Dog API"
+  description: Public Dog-related API
+servers:
+  - url: https://dog.ceo/api
+paths:
+  /breeds/image/random:
+    get:
+      description: Generate a random duck image URL
+      responses:
+        "200":
+          description: Successful retrieved a random dog image 'url'
+          example:
+            {
+              message: "https://images.dog.ceo/breeds/entlebucher/n02108000_2212.jpg",
+              status: "success"
+            }

@@ -8,7 +8,7 @@ templateClass: tmpl-transparency
 </center>
 <center>
     <p>Because we value transparency, we've made available for your viewing pleasure all the API Endpoints We Call On This
-        Site</p>
+        Site.</p>
 </center>
 <center>
     <hr/>
@@ -27,6 +27,25 @@ templateClass: tmpl-transparency
                 </label>
                 <mark>
                     <code>{{duckOpenApi.paths["/random"].get.responses["200"].example | dump}}</code>
+                </mark>
+            </span>
+        </li>
+    </ul>
+    <h3>{{dogOpenApi.info.title}}</h3>
+    <ul style="list-style: none;">
+        <li>
+            <label style="color:green;">GET</label>
+            {{dogOpenApi.servers[0].url}}/breeds/image/random</li>
+        <li>
+            <b>{{dogOpenApi.paths["/breeds/image/random"].get.description}}</b>
+        </li>
+        <li>
+            <span>
+                <label style="color:green;">
+                    <b>RESPONSE:</b>
+                </label>
+                <mark>
+                    <code>{{dogOpenApi.paths["/breeds/image/random"].get.responses["200"].example | dump}}</code>
                 </mark>
             </span>
         </li>
