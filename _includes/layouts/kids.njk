@@ -256,7 +256,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
   setFlowerImage()
 
   document.getElementById("play-duck-game").addEventListener("click", playDuckGame);
-  document.getElementById("clear-duck-game").addEventListener("click", resetGameState);
+  
 
   function isInsidePond() {
     // the duck must stay in the pond
@@ -457,7 +457,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
           {% image "./img/duck.png", "a cunning duck", "100vw", "duck-score-image", "png", "../img" %}
           {% image "./img/flower.jpeg", "a mysterious glowing flower", "100vw", "flower-for-duck-score-image", "jpeg", "../img", [25, 25] %}
         <button type="button" id="play-duck-game">Play</button>
-        <button type="button" id="clear-duck-game">Clear Game</button>
         <br />
         <p id="score"></p>
       </div>
