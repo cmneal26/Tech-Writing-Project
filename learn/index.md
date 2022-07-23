@@ -3,7 +3,7 @@ layout: layouts/base.njk
 title: Learning modules
 eleventyNavigation:
   key: Learn
-  order: 3
+  order: 4
 ---
 
 # Learning Modules
