@@ -233,7 +233,20 @@ a[href].direct-link:focus:visited,
 }
 
 /* Kids Content Page */
-
+/*General Kids Page CSS */
+.blue-button {
+  border-radius: 12px;
+  background-color:blue;
+  border: none;
+  color: violet;
+  padding: 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
 /* Snakes And Mongooses */
 #board {
    height: 300px;
@@ -251,6 +264,10 @@ a[href].direct-link:focus:visited,
    border: 2px solid green;
 }
 
+#play-button {
+  
+}
+
 /* Duck Game */
 
 canvas {
@@ -265,6 +282,11 @@ canvas {
   margin: 10px;
 }
 
+#duck-game-title {
+  margin: 10px;
+  color: #070079;
+}
+
 #games-container {
   background-color: #AFEEEE;
 }
@@ -274,17 +296,7 @@ canvas {
 }
 
 #play-duck-game {
-  border-radius: 12px;
-  background-color:blue;
-  border: none;
-  color: violet;
-  padding: 20px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer;
+ 
 }
 
 
