@@ -265,6 +265,11 @@ canvas {
   margin: 10px;
 }
 
+#duck-game-title {
+  margin: 10px;
+  color: #070079;
+}
+
 #games-container {
   background-color: #AFEEEE;
 }
