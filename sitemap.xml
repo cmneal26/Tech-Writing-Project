@@ -32,17 +32,7 @@
   </url>
   
   <url>
-    <loc>https://freethebirds.com/Tech-Writing-Project/analytes/</loc>
-    <lastmod>2022-07-23</lastmod>
-  </url>
-  
-  <url>
     <loc>https://freethebirds.com/Tech-Writing-Project/api/api-reference/</loc>
-    <lastmod>2022-07-23</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://freethebirds.com/Tech-Writing-Project/browser-fetching/</loc>
     <lastmod>2022-07-23</lastmod>
   </url>
   
@@ -58,6 +48,21 @@
   
   <url>
     <loc>https://freethebirds.com/Tech-Writing-Project/kids/</loc>
+    <lastmod>2022-07-23</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://freethebirds.com/Tech-Writing-Project/learn/analytes/</loc>
+    <lastmod>2022-07-23</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://freethebirds.com/Tech-Writing-Project/learn/browser-fetching/</loc>
+    <lastmod>2022-07-23</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://freethebirds.com/Tech-Writing-Project/learn/</loc>
     <lastmod>2022-07-23</lastmod>
   </url>
   
