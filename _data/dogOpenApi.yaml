@@ -8,7 +8,7 @@ servers:
 paths:
   /breeds/image/random:
     get:
-      description: Generate a random duck image URL
+      description: Generate a random dog image URL
       responses:
         "200":
           description: Successful retrieved a random dog image 'url'
