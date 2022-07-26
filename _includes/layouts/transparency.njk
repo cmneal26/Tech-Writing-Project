@@ -50,4 +50,24 @@ templateClass: tmpl-transparency
             </span>
         </li>
     </ul>
+
+    <h3>{{analytesOpenApi.info.title}}</h3>
+    <ul style="list-style: none;">
+        <li>
+            <label style="color:green;">GET</label>
+            {{analytesOpenApi.servers[0].url}}/analytes</li>
+        <li>
+            <b>{{analytesOpenApi.paths["/analytes"].get.description}}</b>
+        </li>
+        <li>
+            <span>
+                <label style="color:green;">
+                    <b>RESPONSE:</b>
+                </label>
+                <mark>
+                    <code>{{analytesOpenApi.paths["/analytes"].get.responses["200"].example | dump}}</code>
+                </mark>
+            </span>
+        </li>
+    </ul>
 </center>
