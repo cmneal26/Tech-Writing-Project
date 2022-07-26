@@ -7,13 +7,13 @@ templateClass: tmpl-transparency
     <h1>Transparency</h1>
 </center>
 <center>
-    <p>Because we value transparency, we've made available for your viewing pleasure all the API Endpoints We Call On This
-        Site.</p>
+    <p>Because we value transparency we've made available for your viewing pleasure all the API endpoints we call on this
+        site.</p>
 </center>
 <center>
     <hr/>
     <h3>{{duckOpenApi.info.title}}</h3>
-    <ul style="list-style: none;">
+    <ul id="duck-list" style="list-style: none;">
         <li>
             <label style="color:green;">GET</label>
             {{duckOpenApi.servers[0].url}}/random</li>
@@ -32,7 +32,7 @@ templateClass: tmpl-transparency
         </li>
     </ul>
     <h3>{{dogOpenApi.info.title}}</h3>
-    <ul style="list-style: none;">
+    <ul id="dog-list" style="list-style: none;">
         <li>
             <label style="color:green;">GET</label>
             {{dogOpenApi.servers[0].url}}/breeds/image/random</li>
@@ -52,7 +52,7 @@ templateClass: tmpl-transparency
     </ul>
 
     <h3>{{analytesOpenApi.info.title}}</h3>
-    <ul style="list-style: none;">
+    <ul id="analytes-list" style="list-style: none;">
         <li>
             <label style="color:green;">GET</label>
             {{analytesOpenApi.servers[0].url}}/analytes</li>
