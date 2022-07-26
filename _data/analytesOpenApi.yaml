@@ -8,7 +8,7 @@ servers:
 paths:
   /analytes:
     get:
-      description: Retrieve list of Analytes.
+      description: Retrieve list of Analytes
       parameters:
         - in: query
           name: name
