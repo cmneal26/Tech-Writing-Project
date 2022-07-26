@@ -1,0 +1,55 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: "Analyte API"
+  description: Public Analyte-related API
+servers:
+  - url: https://stark-ravine-46729.herokuapp.com/api/v1
+paths:
+  /analytes:
+    get:
+      description: Retrieve list of Analytes.
+      parameters:
+        - in: query
+          name: name
+          schema:
+            example: "Acephate"
+          required: true
+      responses:
+        "200":
+          description: Successfully retrieved a list of analytes'
+          example:
+            {
+              "data": [{
+                          "sfo": "        ",
+                          "sfo_key": null,
+                          "iur": "        ",
+                          "iur_key": null,
+                          "rfdo": "0.0003",
+                          "rfdo_key": "O",
+                          "rfci": "        ",
+                          "rfci_key": null,
+                          "vol": null,
+                          "mutagen": null,
+                          "giabs": "1",
+                          "absd": "0.1",
+                          "csat": "         ",
+                          "analyte": "Acephate",
+                          "cas_number": "30560-19-1",
+                          "resident_soil": "19",
+                          "resident_soil_key": "n",
+                          "industrial_soil": "250",
+                          "industrial_soil_key": "n",
+                          "resident_air": "        ",
+                          "resident_air_key": null,
+                          "industrial_air": "        ",
+                          "industrial_air_key": null,
+                          "tapwater": "6",
+                          "tapwater_key": "n",
+                          "mcl": null,
+                          "risk_based_ssl": "0.0013",
+                          "risk_based_ssl_key": "n",
+                          "mcl_based_ssl": "        "
+                      }
+                  ]
+             }
