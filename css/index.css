@@ -264,10 +264,6 @@ a[href].direct-link:focus:visited,
    border: 2px solid green;
 }
 
-#play-button {
-  
-}
-
 /* Duck Game */
 
 canvas {
@@ -294,16 +290,6 @@ canvas {
 #flower-for-duck-score-image {
   display: none;
 }
-
-#play-duck-game {
- 
-}
-
-
-
-
-
-
 
 /* Home */
 
