@@ -36,65 +36,53 @@
 
         const DEFAULT_GAME_STATE = {
           board: "---------",
-          playerTurn: 'O', // human player is always O, goes first
+          playerTurn: 'O', // human player is always O, goes first, mongoose
           playing: false,
-          winner: null,
-          opponent: { // update this later using selectRandomOpponent()
-            name: "Shirkhan"
-          }
+          winner: null
         }
+
+        let gameState = {}
 
         // functions to set DOM
         const clearCells = () => {
               const cellIds = ['0', '1', '2', '3', '4', '5', '6', '7', '8']
               cellIds.forEach(cellId => {
                 const cell = document.getElementById(cellId)
-                cell.innerText = ''
+                cell.className = 'cell'
               })
         }
-        const setSnakeBackground = (squareId) => {
-            // assign the html elements such that squareId = the element ID
-            const snakeSquare = document.getElementById(squareId)
-            snakeSquare.className = "snake"
-        }
 
-        const setMongooseBackground = (squareId) => {
-            // assign the html elements such that squareId = the element ID
-            const mongooseSquare = document.getElementById(squareId)
-            mongooseSquare.className = "mongoose"
+        const setSquareBackground = (squareId, imageClass) => {
+          const square = document.getElementById(squareId)
+          square.className = 'cell ' + imageClass 
         }
-        // functions to handle the non-visual game play elements
+    
 
 String.prototype.replaceAt = function(index, replacement) {
   return this.substring(0, index) + replacement + this.substring(index + replacement.length);
 }
 
-function getRandomInt(max) {
-  // HELP; use the internet!
-  // returns random int with maximum value of max
-  // your code goes here
+function getRandomInt(max, min = 0) {
+  return Math.floor(Math.random() * (max - min)) + min
 }
 
-const getEmptySquares = (board) => {
-  // HELP!
-  // use for dumb TTT opponent; return array of empty square indexes
+const getEmptySquares = () => {
   const emptySquares = []
-  // your code goes here
+  
+  for (let squareIndex = 0; squareIndex < gameState.board.length; squareIndex++) {
+    if (gameState.board.charAt(squareIndex) === "-") {
+       emptySquares.push(squareIndex)
+    } 
+  }
+  console.info("emptySquares", emptySquares)
   return emptySquares
-}
-const selectRandomOpponent = () => {
-  // random opponent array of objects; lives in this function 
-  // return a random opponent from that array 
-}
-const setOpponent = (opponent) => {
-  // update game state with new opponent
-  // update visual box to right of TTT game with opponent data, including power level  
 }
 
 const getDumbOpponentMove = (gameState) => { 
-  // HELP ME! use getEmptySquares!  
-  // your code goes here
-  //return emptySquares[randomChoice]
+  const emptySquares = getEmptySquares()
+  const randomChoice = getRandomInt(emptySquares.length)
+  console.info("randomChoice", randomChoice)
+  return emptySquares[randomChoice]
 }
 
 const resetGameState = (gameState, newGameState) => {
@@ -102,19 +90,23 @@ const resetGameState = (gameState, newGameState) => {
   gameState.playerTurn = newGameState.playerTurn
   gameState.playing = newGameState.playing
   gameState.winner = newGameState.winner
-  gameState.opponent = newGameState.opponent
+  clearCells()
 }
 
-function move(gameState, squareIndex) {
-  gameState.board = gameState.board.replaceAt(squareIndex, gameState.playerTurn);
+function move(squareIndex) {
+
+  gameState.board = gameState.board.replaceAt(parseInt(squareIndex), gameState.playerTurn);
+  const cssClass = gameState.playerTurn === 'O' ? 'snake' : 'mongoose'  
+  setSquareBackground(squareIndex, cssClass)
 }
 
-const setPlayerTurn = (gameState, player) => {
+const setPlayerTurn = (player) => {
   if (player) {
     gameState.playerTurn = player
   } else {
     gameState.playerTurn = gameState.playerTurn === 'X' ? 'O' : 'X'
   }
+  console.info("playerTurn", gameState.playerTurn)
 }
 
 const checkGameStatus = (board) => {
@@ -160,25 +152,25 @@ const checkGameStatus = (board) => {
   }
   // right col
   if (
-    board.charAt(6) !== '-' &&
-    (board.charAt(6) === board.charAt(7)) &&
-    (board.charAt(7) === board.charAt(8))
+    board.charAt(2) !== '-' &&
+    (board.charAt(2) === board.charAt(5)) &&
+    (board.charAt(5) === board.charAt(8))
   ) {
     return WIN
   }
   // left-top-start diagonal
   if (
-    board.charAt(6) !== '-' &&
-    (board.charAt(6) === board.charAt(7)) &&
-    (board.charAt(7) === board.charAt(8))
+    board.charAt(0) !== '-' &&
+    (board.charAt(0) === board.charAt(4)) &&
+    (board.charAt(4) === board.charAt(8))
   ) {
     return WIN
   }
   // right-top-start diagonal
   if (
-    board.charAt(6) !== '-' &&
-    (board.charAt(6) === board.charAt(7)) &&
-    (board.charAt(7) === board.charAt(8))
+    board.charAt(2) !== '-' &&
+    (board.charAt(2) === board.charAt(4)) &&
+    (board.charAt(4) === board.charAt(6))
   ) {
     return WIN
   }
@@ -191,37 +183,53 @@ const checkGameStatus = (board) => {
 
 }
 
+const clickCell = (cellId) => {
+  let gameStatus;
+  if (gameState.playing) {
+    const cell = document.getElementById(cellId)
+    // make sure cell isn't occupied
+    if (gameState.board.charAt(cellId) !== '-') return;
+    // player move
+    move(cellId)
+    // check game status
+    gameStatus = checkGameStatus(gameState.board)
+    // if not game over, opponent moves
+    if (gameStatus === WIN) {
+      console.info(`\n${gameState.playerTurn} wins`)
+      gameState.winner = true
+      gameState.playing = false
+    } else if (gameStatus === TIE)  {
+      console.info("The Game is a tie!")
+      gameState.playing = false
+    } else { // IN_PROGRESS
+      // change player turn
+      setPlayerTurn()
+      // computer moves
+      const computerMove = getDumbOpponentMove(gameState.board)
+      move(computerMove)
+      gameStatus = checkGameStatus(gameState.board)
+      if (gameStatus === WIN) {
+      console.info(`\n${gameState.playerTurn} wins`)
+      gameState.winner = true
+      gameState.playing = false
+    } else if (gameStatus === TIE)  {
+      console.info("The Game is a tie!")
+      gameState.playing = false
+    } else { // IN_PROGRESS, switch turns
+        setPlayerTurn()
+      }
+    }
+  }
+}
+
 
 const play = () => {
-  let playerTurns = 0
-  const gameState = {}
-  let gameStatus;
+ 
+  gameState = {}
   console.log("now playing TTT")
   resetGameState(gameState, DEFAULT_GAME_STATE)
   gameState.playing = true
 
-  while (gameState.playing) {
-    playerTurns += 1
-    const turnMove = getDumbOpponentMove(gameState)
-    move(gameState, turnMove)
-    gameStatus = checkGameStatus(gameState.board)
-    if (gameStatus !== IN_PROGRESS) {
-      break;
-    }
-    // change player turn
-    setPlayerTurn(gameState)
-  }
-
-  console.log("play done, game state:", gameState)
-
-  if (gameStatus === WIN) {
-    console.info(`\n${gameState.playerTurn} wins`)
-    gameState.winner = true
-  } else {
-    console.info("The Game is a tie!")
-  }
-
-  gameState.playing = false
 }
 </script>
 <script id="a-duck-strikes-back">
@@ -495,23 +503,23 @@ document.addEventListener("DOMContentLoaded", (event) => {
          <h2>Snakes and Mongooses</h2> 
         <table id="board">
             <tr class="row">
-                <td class="cell mongoose" id="0" onclick="clickCell('0')"></td>
-                <td class="cell snake" id="1" onclick="clickCell('1')"></td>
-                <td class="cell mongoose" id="2" onclick="clickCell('2')"></td>
+                <td class="cell" id="0" onclick="clickCell('0')"></td>
+                <td class="cell" id="1" onclick="clickCell('1')"></td>
+                <td class="cell" id="2" onclick="clickCell('2')"></td>
             </tr>
             <tr class="row">
-                <td class="cell snake" id="3" onclick="clickCell('3')"></td>
-                <td class="cell mongoose" id="4" onclick="clickCell('4')"></td>
-                <td class="cell mongoose" id="5" onclick="clickCell('5')"></td>
+                <td class="cell" id="3" onclick="clickCell('3')"></td>
+                <td class="cell" id="4" onclick="clickCell('4')"></td>
+                <td class="cell" id="5" onclick="clickCell('5')"></td>
             </tr>
             <tr class="row">
-                <td class="cell snake" id="6" onclick="clickCell('6')"></td>
-                <td class="cell snake" id="7" onclick="clickCell('7')"></td>
-                <td class="cell snake" id="8" onclick="clickCell('8')"></td>
+                <td class="cell" id="6" onclick="clickCell('6')"></td>
+                <td class="cell" id="7" onclick="clickCell('7')"></td>
+                <td class="cell" id="8" onclick="clickCell('8')"></td>
             </tr>
         </table>
         <span>
-            <button id="play-button" onclick="" class="blue-button">
+            <button id="play-button" onclick="play()" class="blue-button">
                 Play
             </button>
         </span>
