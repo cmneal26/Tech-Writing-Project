@@ -163,6 +163,8 @@ const clickCell = (cellId) => {
   let gameStatus;
   if (gameState.playing) {
     const cell = document.getElementById(cellId)
+    // make sure cell isn't occupied
+    if (gameState.board.charAt(cellId) !== '-') return;
     // player move
     move(cellId)
     // check game status
