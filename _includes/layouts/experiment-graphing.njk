@@ -6,7 +6,16 @@ templateClass: tmpl-experiment-graphing
 <script id="analyte-interaction">
 
   const retrieveAnalyte = (analyteIdentifier) => {
-       console.info("retrieveAnalyte()")      
+       console.info("retrieveAnalyte()")  
+       const url = "https://stark-ravine-46729.herokuapp.com/api/v1/analytes?name=Acetate"
+       fetch(url)
+  // Resolve the JSON returned from the url
+  .then(response => response.json())
+  // Display the image and the raw JSON in the page
+  .then(result => {
+  // Work with the Analyte data
+  console.log(result)
+  })   
   }
 
   const clearAnalyte = () => {
