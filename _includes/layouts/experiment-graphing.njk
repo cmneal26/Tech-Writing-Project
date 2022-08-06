@@ -5,9 +5,10 @@ templateClass: tmpl-experiment-graphing
 
 <script id="analyte-interaction">
 document.addEventListener("DOMContentLoaded", (event) => {
-  const retrieveAnalyte = (event) => {
+  const retrieveAnalyte = () => {
        console.info("retrieveAnalyte()")  
-       const analyteName = event.target.value
+       const analyteName = document.getElementById('retrieve-analyte-input').value
+       if (analyteName === '' ) return;
        const url = `https://stark-ravine-46729.herokuapp.com/api/v1/analytes?name=${analyteName}`
        console.log(url)
        fetch(url)
@@ -59,7 +60,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
   
 } 
 
-  document.getElementById("retrieve-analyte").addEventListener("click", (event) => {retrieveAnalyte(event)});
+  document.getElementById("retrieve-analyte").addEventListener("click", retrieveAnalyte );
    {# const riskBasedsslkey = analytes.data[0]["risk_based_ssl_key"]
    const riskBasedsslkeyElement = document.getElementById("r4c") #}
    {# const mclBasedssl = analytes.data[0]["mcl_based_ssl"] #}
