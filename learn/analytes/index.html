@@ -42,6 +42,10 @@ document.addEventListener("DOMContentLoaded", (event) => {
   .then(result => {
   // Work with the Analyte data
   console.log(result) 
+  const tableHeaderElement = document.getElementById("analyte-header-name")
+  const tableHeaderName = result.data[0]["analyte"]
+  tableHeaderElement.innerText = tableHeaderName
+
    const residentSoil = result.data[0]["resident_soil"]
    const residentSoilElement = document.getElementById("r1c1")
    residentSoilElement.innerText = residentSoil
@@ -75,13 +79,10 @@ document.addEventListener("DOMContentLoaded", (event) => {
    mclBasedsslElement.innerText = mclBasedssl
   })
   
-  // add mock analyte data
-  
 } 
 
   document.getElementById("retrieve-analyte").addEventListener("click", retrieveAnalyte );
-   
-   
+  
 
   const clearAnalyte = () => {
       console.info("clearAnalyte()")
@@ -97,6 +98,21 @@ document.addEventListener("DOMContentLoaded", (event) => {
          
          <th id="analyte-table-header"></th>
 
+<tr>
+  <th id="analyte-header-name"></th>
+  </tr>
+
+  <tr>
+    <th class="table-header-name">Resident Soil (mg/kg)</th>
+    <th class="table-header-name">Industrial Soil (mg/kg)</th>
+    <th class="table-header-name">Resident Air (ug/m3)</th>
+    <th class="table-header-name">Industrial Air (ug/m3)</th>
+    <th class="table-header-name">Tapwater (ug/L)</th>
+    <th class="table-header-name">MCL (ug/L)</th>
+    <th class="table-header-name">Risk-based SSL (mg/kg)</th>
+    <th class="table-header-name">MCL-based SSL (mg/kg)</th>
+  </tr>
+
          <tr class="analyte-table-row" id="row1">
            <td class="analyte-data-col" id="r1c1"></td>
            <td class="analyte-data-col" id="r1c2"></td>
@@ -105,25 +121,16 @@ document.addEventListener("DOMContentLoaded", (event) => {
            <td class="analyte-data-col" id="r1c5"></td>
            <td class="analyte-data-col" id="r1c6"></td>
            <td class="analyte-data-col" id="r1c7"></td>
+           <td class="analyte-data-col" id="r1c8"></td>
          </tr>
+<tr>
+ <td class="table-key" id="r2c1">
+  <div id="table-content-key">
+ug/l = micrograms per liter
+  </div>
+ </td>
+  </tr>
 
-          <tr class="analyte-table-row" id="row2">
-           <td class="analyte-data-col" id="r2c1"></td>
-           <td class="analyte-data-col" id="r2c2"></td>
-           <td class="analyte-data-col" id="r2c3"></td>
-         </tr>
-
-         <tr class="analyte-table-row" id="row3">
-           <td class="analyte-data-col" id="r3c1"></td>
-           <td class="analyte-data-col" id="r3c2"></td>
-           <td class="analyte-data-col" id="r3c3"></td>
-         </tr>
-            
-<tr class="analyte-table-row" id="row4">
-           <td class="analyte-data-col" id="r4c1"></td>
-           <td class="analyte-data-col" id="r4c2"></td>
-           <td class="analyte-data-col" id="r4c3"></td>
-         </tr>
 
         </table>
 </div>

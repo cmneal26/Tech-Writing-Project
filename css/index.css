@@ -308,3 +308,27 @@ canvas {
   width: 50px;
   height: 50px;
 }
+
+/* Analytes Page */
+
+.analyte-data-col {
+  outline: 1px groove black; 
+  border-style: groove;
+  color: red;
+  text-align: center;
+}
+
+#analyte-header-name {
+  color: blue;
+  font-size: 30px;
+  border: 1px black;
+  border-style: groove;
+}
+
+.table-header-name {
+  font-family:'Times New Roman', Times, serif;
+}
+
+#table-content-key {
+  font-size: small;
+}
