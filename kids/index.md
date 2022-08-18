@@ -7,7 +7,7 @@ eleventyNavigation:
   order: 6
 ---
 
-# TTT WITH DUMB COMPUTER PLAYER
+
 
 
 

@@ -4,14 +4,17 @@ templateClass: tmpl-transparency
 ---
 
 <center>
-    <h1>Transparency</h1>
+    <h1>APIs</h1>
 </center>
+
+
+<div style="text-align: center;">
+    <div style="display: inline-block; text-align: left;">
+        {{ content | safe }}
+    </div>
+</div>
+
 <center>
-    <p>Because we value transparency we've made available for your viewing pleasure all the API endpoints we call on this
-        site.</p>
-</center>
-<center>
-    <hr/>
     <h3>{{duckOpenApi.info.title}}</h3>
     <ul id="duck-list" style="list-style: none;">
         <li>
