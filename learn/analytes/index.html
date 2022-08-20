@@ -27,6 +27,20 @@
 
     <main class="tmpl-experiment-graphing.njk">
       
+<h2>Extract RSL Data From EPA Generic Tables<h2>
+
+  <p>
+The United States (US) Environmental Protection Agency (EPA) maintains a database to list all hazardous substances that have been established as human health risks. This database lists each hazardous substance and its respective Regional Screening Levels (RSLs): the maximum level of a hazardous substance that is permissible within the soil, soil vapor, indoor air, groundwater, or tap water of a site before an investigation must be conducted. Each exposure pathway (soil, indoor air, etc) has its own RSL value, and these values change based on whether the contaminated site is industrial or residential.
+    <P>
+
+  <p>
+    The purpose of the search tool below is to create a fast way to view RSL data from the EPA Generic Tables for a particular hazardous substance, or analyte. Using this tool, it will not be necessary to sift through a large PDF or Excel file, and extraneous data is filtered out.
+    <p>
+
+  <p>
+    Type in the name of an analyte with the first letter of the word capitalized and the table will return data for the categories listed below.
+    <p>
+
 <script id="analyte-interaction">
 document.addEventListener("DOMContentLoaded", (event) => {
   const retrieveAnalyte = () => {
@@ -152,8 +166,11 @@ ug/l = micrograms per liter
 
 </main>
 
-<p>This search tool allows users to extract data from the EPA RSL database.</p>
-<h3 id="testing-injecting-data-and-graphing-that-data." tabindex="-1">Testing injecting data and graphing that data. <a class="direct-link" href="#testing-injecting-data-and-graphing-that-data." aria-hidden="true">#</a></h3>
+<p>Important Data Limitations</p>
+<p>This search tool is not a replacement for full site characterization. While the EPA Generic Tables provide a baseline to measure the approximate RSL for a contaminated site, they are not adequate to determine exact RSLs. These will depend on multiple factors relating to location and the extent of contamination present on a property.</p>
+<p>The EPA website to view the full Generic Tables is called &quot;Regional Screening Levels (RSLs) - Generic Tables.&quot; Links for the website and the table are listed here:<br>
+<a href="http://epa.gov/risk/regional-screening-levels-rsls-generic-tables">epa.gov/risk/regional-screening-levels-rsls-generic-tables</a><br>
+<a href="http://semspub.epa.gov/work/HQ/402369">semspub.epa.gov/work/HQ/402369</a></p>
 
     </main>
 
