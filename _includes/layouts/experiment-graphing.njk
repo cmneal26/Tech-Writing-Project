@@ -3,6 +3,20 @@ layout: layouts/base.njk
 templateClass: tmpl-experiment-graphing
 ---
 
+<h2>Extract RSL Data From EPA Generic Tables<h2>
+
+  <p>
+The United States (US) Environmental Protection Agency (EPA) maintains a database to list all hazardous substances that have been established as human health risks. This database lists each hazardous substance and its respective Regional Screening Levels (RSLs): the maximum level of a hazardous substance that is permissible within the soil, soil vapor, indoor air, groundwater, or tap water of a site before an investigation must be conducted. Each exposure pathway (soil, indoor air, etc) has its own RSL value, and these values change based on whether the contaminated site is industrial or residential.
+    <P>
+
+  <p>
+    The purpose of the search tool below is to create a fast way to view RSL data from the EPA Generic Tables for a particular hazardous substance, or analyte. Using this tool, it will not be necessary to sift through a large PDF or Excel file, and extraneous data is filtered out.
+    <p>
+
+  <p>
+    Type in the name of an analyte with the first letter of the word capitalized and the table will return data for the categories listed below.
+    <p>
+
 <script id="analyte-interaction">
 document.addEventListener("DOMContentLoaded", (event) => {
   const retrieveAnalyte = () => {
