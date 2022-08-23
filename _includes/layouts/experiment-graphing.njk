@@ -3,19 +3,21 @@ layout: layouts/base.njk
 templateClass: tmpl-experiment-graphing
 ---
 
-<h2>Extract RSL Data From EPA Generic Tables<h2>
+<h2>Extract RSL Data From EPA Generic Tables</h2>
 
-  <p>
+  <p class="analyte-paragraph"> 
 The United States (US) Environmental Protection Agency (EPA) maintains a database to list all hazardous substances that have been established as human health risks. This database lists each hazardous substance and its respective Regional Screening Levels (RSLs): the maximum level of a hazardous substance that is permissible within the soil, soil vapor, indoor air, groundwater, or tap water of a site before an investigation must be conducted. Each exposure pathway (soil, indoor air, etc) has its own RSL value, and these values change based on whether the contaminated site is industrial or residential.
-    <P>
+    </p>
 
-  <p>
+<img src="../../img/rsl-graphic.png" alt="rsl graphic">
+
+  <p class="analyte-paragraph">
     The purpose of the search tool below is to create a fast way to view RSL data from the EPA Generic Tables for a particular hazardous substance, or analyte. Using this tool, it will not be necessary to sift through a large PDF or Excel file, and extraneous data is filtered out.
-    <p>
+    </p>
 
-  <p>
-    Type in the name of an analyte with the first letter of the word capitalized and the table will return data for the categories listed below.
-    <p>
+  <p class="analyte-paragraph">
+    Type in the name of an analyte with the first letter of the word capitalized (i.e. Benzene) and the table will return data for the categories listed below.
+    </p>
 
 <script id="analyte-interaction">
 document.addEventListener("DOMContentLoaded", (event) => {
@@ -32,9 +34,10 @@ document.addEventListener("DOMContentLoaded", (event) => {
   .then(result => {
   // Work with the Analyte data
   console.log(result) 
-  const tableHeaderElement = document.getElementById("analyte-header-name")
-  const tableHeaderName = result.data[0]["analyte"]
-  tableHeaderElement.innerText = tableHeaderName
+
+  const tableTitleElement = document.getElementById("analyte-name")
+  const tableTitleName = result.data[0]["analyte"]
+  tableTitleElement.innerText = tableTitleName
 
    const residentSoil = result.data[0]["resident_soil"]
    const residentSoilElement = document.getElementById("r1c1")
@@ -84,13 +87,12 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
 <div id="analyte-tables">
 
+<h2 id="analyte-name"></h2>
+
+
    <table class="analyte-table" id="">
          
          <th id="analyte-table-header"></th>
-
-<tr>
-  <th id="analyte-header-name"></th>
-  </tr>
 
   <tr>
     <th class="table-header-name">Resident Soil (mg/kg)</th>
@@ -113,18 +115,13 @@ document.addEventListener("DOMContentLoaded", (event) => {
            <td class="analyte-data-col" id="r1c7"></td>
            <td class="analyte-data-col" id="r1c8"></td>
          </tr>
-<tr>
- <td class="table-key" id="r2c1">
-  <div id="table-content-key">
-ug/l = micrograms per liter
-  </div>
- </td>
-  </tr>
+
 
 
         </table>
 </div>
 
+<div id="content-key">mg/kg = milligrams per kilogram &nbsp;&nbsp; ug/m<sup>3</sup> = micrograms per cubic meter &nbsp;&nbsp; ug/l = micrograms per liter &nbsp;&nbsp; MCL = Maximum Contaminant Level &nbsp;&nbsp; SSL = Soil Screening Level</div>
 
 <main id="content-pane">
 
