@@ -316,21 +316,28 @@ canvas {
   border-style: groove;
   color: red;
   text-align: center;
+  font-size: medium;
+  font-family: 'Times New Roman', Times, serif;
 }
 
 #analyte-header-name {
   color: blue;
-  font-size: 30px;
+  font-size: xx-large;
   border: 1px black;
   border-style: groove;
+  font-family: 'Times New Roman', Times, serif;
+  text-align: center;
 }
 
 .table-header-name {
   font-family:'Times New Roman', Times, serif;
+  font-size: x-large;
 }
 
 #table-content-key {
   font-size: small;
+  font-family: 'Times New Roman', Times, serif;
+  text-align: left;
 }
 
 .p1 {
