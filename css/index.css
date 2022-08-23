@@ -320,11 +320,9 @@ canvas {
   font-family: 'Times New Roman', Times, serif;
 }
 
-#analyte-header-name {
+#analyte-name {
   color: blue;
   font-size: xx-large;
-  border: 1px black;
-  border-style: groove;
   font-family: 'Times New Roman', Times, serif;
   text-align: center;
 }
@@ -340,7 +338,13 @@ canvas {
   text-align: left;
 }
 
-.p1 {
-   font-size: small;
+.analyte-paragraph {
+   font-size: medium;
+   font-family: 'Times New Roman', Times, serif;
 
+}
+
+#content-key {
+  font-size: small;
+  font-family: 'Times New Roman', Times, serif;
 }

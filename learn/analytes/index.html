@@ -27,19 +27,21 @@
 
     <main class="tmpl-experiment-graphing.njk">
       
-<h2>Extract RSL Data From EPA Generic Tables<h2>
+<h2>Extract RSL Data From EPA Generic Tables</h2>
 
-  <p>
+  <p class="analyte-paragraph"> 
 The United States (US) Environmental Protection Agency (EPA) maintains a database to list all hazardous substances that have been established as human health risks. This database lists each hazardous substance and its respective Regional Screening Levels (RSLs): the maximum level of a hazardous substance that is permissible within the soil, soil vapor, indoor air, groundwater, or tap water of a site before an investigation must be conducted. Each exposure pathway (soil, indoor air, etc) has its own RSL value, and these values change based on whether the contaminated site is industrial or residential.
-    <P>
+    </p>
 
-  <p>
+<img src="../../img/rsl-graphic.png" alt="rsl graphic">
+
+  <p class="analyte-paragraph">
     The purpose of the search tool below is to create a fast way to view RSL data from the EPA Generic Tables for a particular hazardous substance, or analyte. Using this tool, it will not be necessary to sift through a large PDF or Excel file, and extraneous data is filtered out.
-    <p>
+    </p>
 
-  <p>
-    Type in the name of an analyte with the first letter of the word capitalized and the table will return data for the categories listed below.
-    <p>
+  <p class="analyte-paragraph">
+    Type in the name of an analyte with the first letter of the word capitalized (i.e. Benzene) and the table will return data for the categories listed below.
+    </p>
 
 <script id="analyte-interaction">
 document.addEventListener("DOMContentLoaded", (event) => {
@@ -56,9 +58,10 @@ document.addEventListener("DOMContentLoaded", (event) => {
   .then(result => {
   // Work with the Analyte data
   console.log(result) 
-  const tableHeaderElement = document.getElementById("analyte-header-name")
-  const tableHeaderName = result.data[0]["analyte"]
-  tableHeaderElement.innerText = tableHeaderName
+
+  const tableTitleElement = document.getElementById("analyte-name")
+  const tableTitleName = result.data[0]["analyte"]
+  tableTitleElement.innerText = tableTitleName
 
    const residentSoil = result.data[0]["resident_soil"]
    const residentSoilElement = document.getElementById("r1c1")
@@ -108,13 +111,12 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
 <div id="analyte-tables">
 
+<h2 id="analyte-name"></h2>
+
+
    <table class="analyte-table" id="">
          
          <th id="analyte-table-header"></th>
-
-<tr>
-  <th id="analyte-header-name"></th>
-  </tr>
 
   <tr>
     <th class="table-header-name">Resident Soil (mg/kg)</th>
@@ -137,18 +139,13 @@ document.addEventListener("DOMContentLoaded", (event) => {
            <td class="analyte-data-col" id="r1c7"></td>
            <td class="analyte-data-col" id="r1c8"></td>
          </tr>
-<tr>
- <td class="table-key" id="r2c1">
-  <div id="table-content-key">
-ug/l = micrograms per liter
-  </div>
- </td>
-  </tr>
+
 
 
         </table>
 </div>
 
+<div id="content-key">mg/kg = milligrams per kilogram &nbsp;&nbsp; ug/m<sup>3</sup> = micrograms per cubic meter &nbsp;&nbsp; ug/l = micrograms per liter &nbsp;&nbsp; MCL = Maximum Contaminant Level &nbsp;&nbsp; SSL = Soil Screening Level</div>
 
 <main id="content-pane">
 
@@ -166,12 +163,12 @@ ug/l = micrograms per liter
 
 </main>
 
-<p>The MCL for an analyte represents the RSL for drinking water, whether or not the source comes from a groundwater aquifer. The SSL for each analyte is protective of groundwater. It represents an estimation of how much soil contamination will leak into groundwater, or the dilution factor. For example, if the MCL for an analyte is 0.06 mg/L and the dilution factor is 10, the SSL will be 0.6 mg/L. The MCL-based SSL is generally used for drinking water contamination and the Risk-based SSL is generally used for groundwater that is not connected to drinking water aquifers.</p>
-<p>Important Data Limitations</p>
-<p>This search tool is not a replacement for full site characterization. While the EPA Generic Tables provide a baseline to measure the approximate RSL for a contaminated site, they are not adequate to determine exact RSLs. These will depend on multiple factors relating to location and the extent of contamination present on a property.</p>
-<p>The EPA website to view the full Generic Tables is called &quot;Regional Screening Levels (RSLs) - Generic Tables.&quot; Links for the website and the table are listed here:<br>
-<a href="http://epa.gov/risk/regional-screening-levels-rsls-generic-tables">epa.gov/risk/regional-screening-levels-rsls-generic-tables</a><br>
-<a href="http://semspub.epa.gov/work/HQ/402369">semspub.epa.gov/work/HQ/402369</a></p>
+<p class="analyte-paragraph">The MCL for an analyte represents the RSL for drinking water, whether or not the source comes from a groundwater aquifer. The SSL for each analyte is protective of groundwater. It represents an estimation of how much soil contamination will leak into groundwater, or the dilution factor. For example, if the MCL for an analyte is 0.06 mg/L and the dilution factor is 10, the SSL will be 0.6 mg/L. The MCL-based SSL is generally used for drinking water contamination and the Risk-based SSL is generally used for groundwater that is not connected to drinking water aquifers.</p>
+<h3 class="analyte-paragraph">Important Data Limitations</h3>
+<p class="analyte-paragraph">This search tool is not a replacement for full site characterization. While the EPA Generic Tables provide a baseline to measure the approximate RSL for a contaminated site, they are not adequate to determine exact RSLs. These will depend on multiple factors relating to location and the extent of contamination present on a property.</p>
+<p class="analyte-paragraph">The EPA website to view the full Generic Tables is called "Regional Screening Levels (RSLs) - Generic Tables." Links for the website and the table are listed here:
+epa.gov/risk/regional-screening-levels-rsls-generic-tables
+semspub.epa.gov/work/HQ/402369</p>
 
     </main>
 
